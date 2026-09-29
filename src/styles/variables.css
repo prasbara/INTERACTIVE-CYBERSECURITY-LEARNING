@@ -1,0 +1,195 @@
+/**
+ * IDS Learning Lab - Design Tokens System
+ * Editorial Minimalism + Bold Accent (Purple & Security Green)
+ * Linear / Vercel design philosophy adapted to Cybersecurity Education.
+ */
+
+:root {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', Consolas, 'Courier New', monospace;
+
+  /* 1. Core Semantic Color System (Warm Light / Purple & Green) */
+  --color-primary: #1c061e;
+  --color-primary-strong: #4a154b;
+  --color-primary-soft: #f4ecf5;
+  --color-primary-glow: rgba(74, 21, 75, 0.08);
+
+  --color-accent: #007a5a;
+  --color-accent-soft: #e8f5f1;
+  --color-accent-hover: #006349;
+
+  --color-background: #f4ede4;
+  --color-surface: #ffffff;
+  --color-surface-soft: #eee5db;
+  --color-surface-hover: #e6dcce;
+
+  --color-text: #1c061e;
+  --color-text-muted: #6f6670;
+  --color-text-subtle: #988e99;
+  --color-text-inverted: #ffffff;
+
+  --color-border: #d8cec3;
+  --color-border-subtle: #e5ded5;
+  --color-border-focus: #4a154b;
+
+  --color-success: #007a5a;
+  --color-success-bg: #e8f5f1;
+  --color-success-border: #a4d4c5;
+  --color-success-text: #005a42;
+
+  --color-warning: #b7791f;
+  --color-warning-bg: #fff8eb;
+  --color-warning-border: #f8dfaa;
+  --color-warning-text: #87540d;
+
+  --color-danger: #b42318;
+  --color-danger-bg: #fdf2f2;
+  --color-danger-border: #f9c2be;
+  --color-danger-text: #8f1b13;
+
+  --color-info: #4a154b;
+  --color-info-bg: #f7eff7;
+  --color-info-border: #dec0df;
+  --color-info-text: #370c38;
+
+  /* Backward Compatibility Aliases */
+  --primary: var(--color-primary-strong);
+  --primary-hover: var(--color-primary);
+  --primary-light: var(--color-primary-soft);
+  --primary-border: var(--color-border);
+  --accent: var(--color-accent);
+  --accent-light: var(--color-accent-soft);
+  --bg: var(--color-background);
+  --background: var(--color-background);
+  --surface: var(--color-surface);
+  --surface-elevated: var(--color-surface-soft);
+  --surface-hover: var(--color-surface-hover);
+  --border: var(--color-border);
+  --border-subtle: var(--color-border-subtle);
+  --border-hover: var(--color-border-focus);
+  --text-primary: var(--color-text);
+  --text-secondary: var(--color-text-muted);
+  --text: var(--color-text);
+  --text-muted: var(--color-text-muted);
+  --text-inverted: var(--color-text-inverted);
+  --success: var(--color-success);
+  --success-bg: var(--color-success-bg);
+  --success-border: var(--color-success-border);
+  --success-text: var(--color-success-text);
+  --warning: var(--color-warning);
+  --warning-bg: var(--color-warning-bg);
+  --warning-border: var(--color-warning-border);
+  --warning-text: var(--color-warning-text);
+  --danger: var(--color-danger);
+  --danger-bg: var(--color-danger-bg);
+  --danger-border: var(--color-danger-border);
+  --danger-text: var(--color-danger-text);
+  --info: var(--color-info);
+  --info-bg: var(--color-info-bg);
+  --info-border: var(--color-info-border);
+  --info-text: var(--color-info-text);
+
+  /* Terminal Colors (Restrained Editorial Tone) */
+  --terminal-bg: #1c061e;
+  --terminal-header: #280a2b;
+  --terminal-text: #f4ede4;
+  --terminal-border: #3d1b40;
+  --terminal-hl-key: #26a27e;
+  --terminal-hl-val: #eed3ef;
+  --terminal-hl-alert: #f97066;
+  --terminal-hl-warn: #fdb022;
+
+  /* 2. Consistent Geometric Radii */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-card: 26px;
+  --radius-panel: 28px;
+  --radius-input: 12px;
+  --radius-modal: 24px;
+  --radius-full: 9999px;
+  --radius-lg: var(--radius-card);
+
+  /* 3. Subtle Flat Shadows (Surface Contrast preferred over heavy drop-shadows) */
+  --shadow-sm: 0 1px 2px rgba(28, 6, 30, 0.04);
+  --shadow-md: 0 4px 12px rgba(28, 6, 30, 0.05);
+  --shadow-lg: 0 12px 28px rgba(28, 6, 30, 0.08);
+
+  /* 4. 4px Spacing Scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* Layout dimensions */
+  --max-width: 1280px;
+  --header-height: 64px;
+  --sidebar-width: 264px;
+
+  /* Micro-transitions */
+  --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] {
+  --color-primary: #f4ede4;
+  --color-primary-strong: #c299c4;
+  --color-primary-soft: #29102c;
+  --color-primary-glow: rgba(194, 153, 196, 0.08);
+
+  --color-accent: #229975;
+  --color-accent-soft: #0a2e22;
+  --color-accent-hover: #29b88d;
+
+  --color-background: #120313;
+  --color-surface: #1d0720;
+  --color-surface-soft: #270d2b;
+  --color-surface-hover: #331338;
+
+  --color-text: #f4ede4;
+  --color-text-muted: #aa9eaa;
+  --color-text-subtle: #796e79;
+  --color-text-inverted: #120313;
+
+  --color-border: #3b173e;
+  --color-border-subtle: #2d1030;
+  --color-border-focus: #c299c4;
+
+  --color-success: #229975;
+  --color-success-bg: #0a2e22;
+  --color-success-border: #145942;
+  --color-success-text: #96dec7;
+
+  --color-warning: #e0962b;
+  --color-warning-bg: #382006;
+  --color-warning-border: #6d410f;
+  --color-warning-text: #fcd9a4;
+
+  --color-danger: #e04f43;
+  --color-danger-bg: #381210;
+  --color-danger-border: #6d2420;
+  --color-danger-text: #f8a8a2;
+
+  --color-info: #c299c4;
+  --color-info-bg: #2d1230;
+  --color-info-border: #522457;
+  --color-info-text: #eed6ef;
+
+  --terminal-bg: #0d020e;
+  --terminal-header: #1a061c;
+  --terminal-text: #f4ede4;
+  --terminal-border: #331136;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.4);
+}

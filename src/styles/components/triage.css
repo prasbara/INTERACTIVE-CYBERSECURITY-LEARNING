@@ -1,0 +1,91 @@
+/* SOC Alert Triage Educational Console */
+
+.triage-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.triage-btn-group {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin: var(--space-4) 0;
+}
+
+.triage-action-btn {
+  flex: 1;
+  min-width: 170px;
+  padding: var(--space-3) var(--space-4);
+  font-weight: 600;
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  cursor: pointer;
+}
+
+.triage-action-btn:hover:not(:disabled) {
+  background-color: var(--color-surface-soft);
+  border-color: var(--color-primary-strong);
+}
+
+/* True Positive: Confirmed malicious intrusion (Red) */
+.triage-action-btn.selected-tp {
+  background-color: rgba(180, 35, 24, 0.1);
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+  font-weight: 700;
+}
+
+/* False Positive: Legitimate benign traffic (Green) */
+.triage-action-btn.selected-fp {
+  background-color: rgba(0, 122, 90, 0.1);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+/* Need More Evidence: Inconclusive hypothesis (Amber) */
+.triage-action-btn.selected-nme {
+  background-color: rgba(183, 121, 31, 0.1);
+  border-color: var(--color-warning);
+  color: var(--color-warning);
+  font-weight: 700;
+}
+
+.evidence-unlock-panel {
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  background-color: var(--color-surface-soft);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-inner);
+}
+
+.evidence-buttons-row {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin: var(--space-3) 0;
+}
+
+.evidence-feed-item {
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-inner);
+  font-size: var(--font-size-xs);
+  line-height: 1.55;
+  margin-top: var(--space-2);
+}
+

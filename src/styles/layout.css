@@ -1,0 +1,152 @@
+/**
+ * Application Layout & Shell System
+ * Editorial grid, generous whitespace, surface contrast, responsive breakpoints.
+ */
+
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  position: relative;
+  transition: background-color var(--transition-normal);
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem 1.5rem;
+  gap: 2rem;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.app-body.no-sidebar {
+  max-width: 1080px;
+  justify-content: center;
+}
+
+.app-body.no-sidebar .app-sidebar {
+  display: none !important;
+}
+
+.app-main {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  outline: none;
+}
+
+.page-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  animation: fadeInLayout var(--transition-fast) ease-out;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Meeting & Lab Layout */
+.meeting-layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.meeting-main {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Bottom Navigation (Mobile Only) */
+.bottom-nav {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .app-body {
+    padding: 1.25rem 1rem 5.5rem 1rem;
+    gap: 1.25rem;
+  }
+
+  .app-sidebar {
+    display: none !important;
+  }
+
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 62px;
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    z-index: 999;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    font-size: 0.7rem;
+    font-weight: 500;
+    cursor: pointer;
+    flex: 1;
+    height: 100%;
+    padding: 6px 0;
+    transition: color var(--transition-fast);
+  }
+
+  .bottom-nav-item.active {
+    color: var(--color-primary-strong);
+    font-weight: 600;
+  }
+
+  .bottom-nav-icon {
+    font-size: 1.15rem;
+    line-height: 1;
+  }
+}
+
+/* Presentation / Projector Mode */
+body.presentation-mode {
+  font-size: 18px;
+}
+body.presentation-mode .container {
+  max-width: 1400px;
+}
+body.presentation-mode .app-sidebar {
+  display: none !important;
+}
+
+@keyframes fadeInLayout {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

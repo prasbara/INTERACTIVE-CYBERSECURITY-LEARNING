@@ -1,0 +1,3586 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IDS LAB — Media Pembelajaran LAPS-Heuristik Keamanan Jaringan SMK</title>
+  <meta name="description" content="Media Pembelajaran Interaktif Intrusion Detection System (IDS) Berbasis LAPS-Heuristik untuk Meningkatkan Kemampuan Berpikir Kritis Siswa Kelas XI TJKT.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. CSS CUSTOM PROPERTIES & THEME SYSTEM
+       ========================================================================== */
+    :root {
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', Consolas, 'Courier New', monospace;
+
+      /* Base Light Theme */
+      --bg: #F5F7FA;
+      --surface: #FFFFFF;
+      --surface-elevated: #F8FAFC;
+      --surface-hover: #EDF2F7;
+      --border: #CBD5E1;
+      --border-subtle: #E2E8F0;
+      
+      --text-primary: #172033;
+      --text-secondary: #475569;
+      --text-muted: #64748B;
+      --text-inverted: #FFFFFF;
+
+      --primary: #1E3A8A;
+      --primary-hover: #172554;
+      --primary-light: #EFF6FF;
+      --primary-border: #93C5FD;
+      
+      --accent: #0284C7;
+      --accent-light: #E0F2FE;
+
+      --success: #16803C;
+      --success-bg: #ECFDF5;
+      --success-border: #A7F3D0;
+      --success-text: #065F46;
+
+      --warning: #B7791F;
+      --warning-bg: #FFFBEB;
+      --warning-border: #FDE68A;
+      --warning-text: #92400E;
+
+      --danger: #C53030;
+      --danger-bg: #FEF2F2;
+      --danger-border: #FECACA;
+      --danger-text: #991B1B;
+
+      --info: #0369A1;
+      --info-bg: #F0F9FF;
+      --info-border: #BAE6FD;
+      --info-text: #075985;
+
+      /* Terminal & Code */
+      --terminal-bg: #0B1120;
+      --terminal-header: #1E293B;
+      --terminal-text: #E2E8F0;
+      --terminal-border: #334155;
+      --terminal-hl-key: #38BDF8;
+      --terminal-hl-val: #34D399;
+      --terminal-hl-alert: #F87171;
+      --terminal-hl-warn: #FBBF24;
+
+      /* Radii & Shadows */
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+      
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      
+      --max-width: 1260px;
+      --header-height: 68px;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0F172A;
+      --surface: #172033;
+      --surface-elevated: #1E293B;
+      --surface-hover: #243248;
+      --border: #334155;
+      --border-subtle: #1E293B;
+
+      --text-primary: #F1F5F9;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+      --text-inverted: #0F172A;
+
+      --primary: #3B82F6;
+      --primary-hover: #60A5FA;
+      --primary-light: #1E293B;
+      --primary-border: #2563EB;
+
+      --accent: #38BDF8;
+      --accent-light: #0C4A6E;
+
+      --success: #10B981;
+      --success-bg: #064E3B;
+      --success-border: #047857;
+      --success-text: #A7F3D0;
+
+      --warning: #F59E0B;
+      --warning-bg: #78350F;
+      --warning-border: #B45309;
+      --warning-text: #FDE68A;
+
+      --danger: #EF4444;
+      --danger-bg: #7F1D1D;
+      --danger-border: #B91C1C;
+      --danger-text: #FECACA;
+
+      --info: #38BDF8;
+      --info-bg: #082F49;
+      --info-border: #0369A1;
+      --info-text: #BAE6FD;
+
+      --terminal-bg: #030712;
+      --terminal-header: #111827;
+      --terminal-text: #F3F4F6;
+      --terminal-border: #1F2937;
+
+      --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 10px 20px -3px rgba(0, 0, 0, 0.5);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]):not([data-theme="dark"]) {
+        --bg: #0F172A;
+        --surface: #172033;
+        --surface-elevated: #1E293B;
+        --surface-hover: #243248;
+        --border: #334155;
+        --border-subtle: #1E293B;
+
+        --text-primary: #F1F5F9;
+        --text-secondary: #94A3B8;
+        --text-muted: #64748B;
+        --text-inverted: #0F172A;
+
+        --primary: #3B82F6;
+        --primary-hover: #60A5FA;
+        --primary-light: #1E293B;
+        --primary-border: #2563EB;
+
+        --accent: #38BDF8;
+        --accent-light: #0C4A6E;
+
+        --success: #10B981;
+        --success-bg: #064E3B;
+        --success-border: #047857;
+        --success-text: #A7F3D0;
+
+        --warning: #F59E0B;
+        --warning-bg: #78350F;
+        --warning-border: #B45309;
+        --warning-text: #FDE68A;
+
+        --danger: #EF4444;
+        --danger-bg: #7F1D1D;
+        --danger-border: #B91C1C;
+        --danger-text: #FECACA;
+
+        --terminal-bg: #030712;
+        --terminal-header: #111827;
+        --terminal-text: #F3F4F6;
+        --terminal-border: #1F2937;
+      }
+    }
+
+    /* Presentation / Proyektor Mode */
+    body.presentation-mode {
+      font-size: 18px;
+    }
+    body.presentation-mode .container {
+      max-width: 1400px;
+    }
+    body.presentation-mode .heuristic-title {
+      font-size: 2.25rem;
+    }
+    body.presentation-mode .terminal-body {
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+    body.presentation-mode .meeting-sidebar {
+      display: none;
+    }
+
+    /* Base Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-family: var(--font-sans);
+      background-color: var(--bg);
+      color: var(--text-primary);
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+      background-color: var(--bg);
+      transition: background-color var(--transition-normal), color var(--transition-normal);
+      overflow-x: hidden;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+      outline: none;
+      transition: all var(--transition-fast);
+    }
+
+    button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* ==========================================================================
+       2. TOP NAVIGATION
+       ========================================================================== */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--border);
+      height: var(--header-height);
+      backdrop-filter: blur(8px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      gap: 1rem;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+    }
+
+    .brand-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .brand-title {
+      font-size: 1.125rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .brand-subtitle {
+      font-size: 0.725rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .nav-btn {
+      padding: 0.45rem 0.8rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .nav-btn:hover {
+      background-color: var(--surface-hover);
+      color: var(--text-primary);
+    }
+    .nav-btn.active {
+      background-color: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary-border);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .header-progress-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.2rem;
+      min-width: 130px;
+    }
+    .header-progress-label {
+      font-size: 0.725rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+    }
+    .header-progress-track {
+      width: 100%;
+      height: 6px;
+      background-color: var(--border-subtle);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+    .header-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: var(--radius-full);
+      transition: width var(--transition-normal);
+      width: 0%;
+    }
+
+    .student-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.75rem;
+      background-color: var(--surface-hover);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .student-badge-avatar {
+      width: 20px;
+      height: 20px;
+      border-radius: var(--radius-full);
+      background-color: var(--primary);
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 700;
+    }
+
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background-color: var(--surface);
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+    .icon-btn:hover {
+      background-color: var(--surface-hover);
+      color: var(--text-primary);
+    }
+
+    /* ==========================================================================
+       3. BUTTONS & BADGES
+       ========================================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all var(--transition-fast);
+      text-decoration: none !important;
+    }
+    .btn-sm {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+      border-radius: var(--radius-sm);
+    }
+    .btn-lg {
+      padding: 0.85rem 1.75rem;
+      font-size: 1rem;
+      border-radius: var(--radius-md);
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: #FFFFFF;
+      border: 1px solid var(--primary);
+    }
+    .btn-primary:hover:not(:disabled) {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      background-color: var(--surface);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover:not(:disabled) {
+      background-color: var(--surface-hover);
+      border-color: var(--text-muted);
+    }
+
+    .btn-accent {
+      background-color: var(--accent);
+      color: #FFFFFF;
+      border: 1px solid var(--accent);
+    }
+    .btn-accent:hover:not(:disabled) {
+      opacity: 0.9;
+    }
+
+    .btn-danger {
+      background-color: var(--danger);
+      color: #FFF;
+      border: 1px solid var(--danger);
+    }
+    .btn-success {
+      background-color: var(--success);
+      color: #FFF;
+      border: 1px solid var(--success);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+      font-size: 0.725rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .badge-primary { background-color: var(--primary-light); color: var(--primary); border: 1px solid var(--primary-border); }
+    .badge-accent { background-color: var(--accent-light); color: var(--accent); border: 1px solid var(--accent); }
+    .badge-success { background-color: var(--success-bg); color: var(--success-text); border: 1px solid var(--success-border); }
+    .badge-warning { background-color: var(--warning-bg); color: var(--warning-text); border: 1px solid var(--warning-border); }
+    .badge-danger { background-color: var(--danger-bg); color: var(--danger-text); border: 1px solid var(--danger-border); }
+    .badge-info { background-color: var(--info-bg); color: var(--info-text); border: 1px solid var(--info-border); }
+    .badge-neutral { background-color: var(--surface-hover); color: var(--text-secondary); border: 1px solid var(--border); }
+
+    /* ==========================================================================
+       4. VIEW LAYOUT & CARDS
+       ========================================================================== */
+    #app-viewport {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 3.5rem;
+    }
+
+    .view-section {
+      display: none;
+      animation: fadeIn var(--transition-normal);
+    }
+    .view-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .content-box {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+    .content-box-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    /* Heuristic Hero */
+    .heuristic-hero {
+      background: linear-gradient(135deg, var(--surface), var(--surface-elevated));
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem 2.25rem;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    .heuristic-hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--primary), var(--accent));
+      border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+    }
+    .heuristic-stage-badge {
+      display: inline-block;
+      margin-bottom: 0.75rem;
+    }
+    .heuristic-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+    }
+    .heuristic-subtitle {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 820px;
+    }
+
+    /* Learning Objectives Card */
+    .learning-objectives-box {
+      background-color: var(--info-bg);
+      border: 1px solid var(--info-border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .objectives-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--info-text);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .objectives-list {
+      list-style: none;
+      padding-left: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-size: 0.875rem;
+      color: var(--text-primary);
+    }
+    .objectives-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .objectives-list li::before {
+      content: "✓";
+      color: var(--info-text);
+      font-weight: 800;
+    }
+
+    /* Critical Thinking Pill */
+    .critical-thinking-aspect {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding: 0.4rem 0.85rem;
+      background-color: var(--surface-hover);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      font-size: 0.775rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .thinking-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: var(--radius-full);
+      background-color: var(--accent);
+    }
+
+    /* Meeting Structure */
+    .meeting-container {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      align-items: flex-start;
+    }
+    .meeting-sidebar {
+      width: 260px;
+      flex-shrink: 0;
+      position: sticky;
+      top: calc(var(--header-height) + 1.5rem);
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .sidebar-header {
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .sidebar-meeting-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+    .sidebar-meeting-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+    .sidebar-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      transition: all var(--transition-fast);
+      text-decoration: none !important;
+    }
+    .sidebar-link:hover {
+      background-color: var(--surface-hover);
+      color: var(--text-primary);
+    }
+    .sidebar-link.active {
+      background-color: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .sidebar-link-num {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      opacity: 0.7;
+    }
+    .meeting-main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* Comparison Table */
+    .table-responsive {
+      overflow-x: auto;
+      margin: 1.25rem 0;
+    }
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .comparison-table th, .comparison-table td {
+      padding: 0.85rem 1.15rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .comparison-table th {
+      background-color: var(--surface-elevated);
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+    .comparison-table tr:hover td {
+      background-color: var(--surface-hover);
+    }
+
+    /* Terminal & Log Viewer */
+    .terminal-container {
+      background-color: var(--terminal-bg);
+      border: 1px solid var(--terminal-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      margin: 1.5rem 0;
+      font-family: var(--font-mono);
+    }
+    .terminal-header {
+      background-color: var(--terminal-header);
+      padding: 0.6rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--terminal-border);
+    }
+    .terminal-dots { display: flex; gap: 0.4rem; }
+    .terminal-dot { width: 11px; height: 11px; border-radius: var(--radius-full); }
+    .dot-red { background-color: #EF4444; }
+    .dot-yellow { background-color: #F59E0B; }
+    .dot-green { background-color: #10B981; }
+    .terminal-title { font-size: 0.775rem; color: #94A3B8; font-weight: 600; }
+    .terminal-body {
+      padding: 1.25rem;
+      color: var(--terminal-text);
+      font-size: 0.875rem;
+      line-height: 1.7;
+      overflow-x: auto;
+    }
+    .log-token {
+      display: inline-block;
+      padding: 0.1rem 0.35rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      border-bottom: 2px dashed var(--accent);
+      transition: all var(--transition-fast);
+    }
+    .log-token:hover { background-color: rgba(56, 189, 248, 0.2); color: #FFF; }
+    .token-hl-key { color: var(--terminal-hl-key); font-weight: 600; }
+    .token-hl-val { color: var(--terminal-hl-val); }
+    .token-hl-alert { color: var(--terminal-hl-alert); font-weight: 700; }
+    .token-hl-warn { color: var(--terminal-hl-warn); }
+
+    .token-inspector-box {
+      margin-top: 1rem;
+      padding: 0.85rem 1.15rem;
+      background-color: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      display: none;
+    }
+    .token-inspector-box.visible { display: block; }
+    .token-inspector-title { font-family: var(--font-mono); font-weight: 700; color: var(--accent); margin-bottom: 0.25rem; }
+
+    /* ==========================================================================
+       5. QUESTION BANK & PEDAGOGICAL FEEDBACK
+       ========================================================================== */
+    .question-card {
+      background-color: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-bottom: 1.75rem;
+    }
+    .question-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .question-context {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      background-color: var(--surface);
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin-bottom: 1rem;
+      line-height: 1.55;
+    }
+    .question-prompt {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-bottom: 1.25rem;
+    }
+    .option-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      user-select: none;
+    }
+    .option-item:hover:not(.locked) {
+      border-color: var(--accent);
+      background-color: var(--surface-hover);
+    }
+    .option-item.selected {
+      border-color: var(--primary);
+      background-color: var(--primary-light);
+    }
+    .option-item.correct {
+      border-color: var(--success);
+      background-color: var(--success-bg);
+      color: var(--success-text);
+      font-weight: 600;
+    }
+    .option-item.incorrect {
+      border-color: var(--danger);
+      background-color: var(--danger-bg);
+      color: var(--danger-text);
+    }
+    .option-item.locked { cursor: default; }
+
+    /* Structured Pedagogical Feedback Engine */
+    .structured-feedback {
+      display: none;
+      padding: 1.25rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin-top: 1.25rem;
+      border-left: 5px solid transparent;
+      animation: fadeIn var(--transition-fast);
+    }
+    .structured-feedback.correct {
+      display: block;
+      background-color: var(--success-bg);
+      border-color: var(--success);
+      color: var(--text-primary);
+    }
+    .structured-feedback.incorrect {
+      display: block;
+      background-color: var(--danger-bg);
+      border-color: var(--danger);
+      color: var(--text-primary);
+    }
+    .feedback-header-badge {
+      display: inline-block;
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .feedback-section-title {
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+    }
+    .feedback-misconception {
+      margin-top: 0.75rem;
+      padding: 0.65rem 0.85rem;
+      background-color: var(--warning-bg);
+      border: 1px solid var(--warning-border);
+      border-radius: var(--radius-sm);
+      color: var(--warning-text);
+      font-size: 0.825rem;
+    }
+    .feedback-refresher {
+      margin-top: 0.85rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    /* ==========================================================================
+       6. MEETING 3: SOC TRIAGE WITH "NEED MORE EVIDENCE"
+       ========================================================================== */
+    .triage-card {
+      background-color: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-bottom: 1.75rem;
+    }
+    .triage-btn-group {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+    .triage-action-btn {
+      flex: 1;
+      min-width: 170px;
+      padding: 0.65rem 1rem;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background-color: var(--surface);
+      color: var(--text-primary);
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+    .triage-action-btn:hover:not(:disabled) {
+      background-color: var(--surface-hover);
+      border-color: var(--text-muted);
+    }
+    .triage-action-btn.selected-tp {
+      background-color: var(--danger-bg);
+      border-color: var(--danger);
+      color: var(--danger-text);
+    }
+    .triage-action-btn.selected-fp {
+      background-color: var(--success-bg);
+      border-color: var(--success);
+      color: var(--success-text);
+    }
+    .triage-action-btn.selected-nme {
+      background-color: var(--info-bg);
+      border-color: var(--info);
+      color: var(--info-text);
+    }
+
+    /* Evidence Unlocking Panel */
+    .evidence-unlock-panel {
+      margin-top: 1rem;
+      padding: 1rem;
+      background-color: var(--surface);
+      border: 1px dashed var(--info);
+      border-radius: var(--radius-sm);
+    }
+    .evidence-buttons-row {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin: 0.75rem 0;
+    }
+    .evidence-feed-item {
+      padding: 0.75rem;
+      background-color: var(--surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      font-size: 0.825rem;
+      line-height: 1.5;
+      margin-top: 0.5rem;
+      animation: fadeIn var(--transition-fast);
+    }
+
+    /* ==========================================================================
+       7. MEETING 4: CTF, HINTS & DEEP REFLECTION
+       ========================================================================== */
+    .ctf-terminal-wrap {
+      background-color: var(--terminal-bg);
+      border: 1px solid var(--terminal-border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      color: var(--terminal-text);
+      font-family: var(--font-mono);
+      font-size: 0.825rem;
+      line-height: 1.7;
+      margin: 1.25rem 0;
+      max-height: 380px;
+      overflow-y: auto;
+    }
+    .flag-submission-box {
+      background-color: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .flag-input-group {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .flag-input {
+      flex: 1;
+      min-width: 280px;
+      font-family: var(--font-mono);
+      padding: 0.65rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background-color: var(--surface);
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+    .reflection-textarea {
+      width: 100%;
+      min-height: 140px;
+      padding: 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background-color: var(--surface);
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      resize: vertical;
+      margin-top: 0.75rem;
+    }
+    .char-counter {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: right;
+      margin-top: 0.35rem;
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       8. MODAL & TOAST SYSTEMS
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .modal-backdrop.open { display: flex; animation: fadeIn var(--transition-fast); }
+    .modal-dialog {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      max-width: 780px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .modal-header {
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .modal-title { font-size: 1.15rem; font-weight: 800; color: var(--text-primary); }
+    .modal-close-btn { font-size: 1.25rem; color: var(--text-muted); cursor: pointer; }
+    .modal-body {
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      overflow-y: auto;
+      flex: 1;
+    }
+    .modal-footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      background-color: var(--surface-elevated);
+      flex-wrap: wrap;
+    }
+
+    .toast-container {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      pointer-events: none;
+    }
+    .toast {
+      pointer-events: auto;
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      min-width: 280px;
+      max-width: 380px;
+      animation: fadeIn var(--transition-normal);
+      transition: all var(--transition-fast);
+      background-color: var(--surface);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+    .toast-success { border-left: 5px solid var(--success); }
+    .toast-warning { border-left: 5px solid var(--warning); }
+    .toast-danger { border-left: 5px solid var(--danger); }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .meeting-container { flex-direction: column; }
+      .meeting-sidebar { width: 100%; position: static; }
+      .sidebar-menu { flex-direction: row; overflow-x: auto; padding-bottom: 0.5rem; }
+      .sidebar-link { white-space: nowrap; }
+    }
+    @media (max-width: 640px) {
+      .top-header { height: auto; padding: 0.6rem 0; }
+      .nav-wrapper { flex-direction: column; align-items: stretch; }
+      .nav-links { justify-content: center; overflow-x: auto; }
+      .header-actions { justify-content: space-between; }
+      .triage-action-btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       TOP NAVIGATION
+       ========================================================================== -->
+  <header class="top-header" role="banner">
+    <div class="container nav-wrapper">
+      <div class="brand-group" id="nav-brand" role="button" tabindex="0" title="Ke Dashboard IDS Lab">
+        <div class="brand-logo" aria-hidden="true">IDS</div>
+        <div>
+          <div class="brand-title">IDS LAB</div>
+          <div class="brand-subtitle">LAPS-Heuristik • Kelas XI TJKT</div>
+        </div>
+      </div>
+
+      <nav class="nav-links" role="navigation" aria-label="Main Navigation">
+        <button class="nav-btn active" id="btn-nav-dashboard" type="button">Dashboard</button>
+        <button class="nav-btn" id="btn-nav-pretest" type="button">Pre-Test</button>
+        <button class="nav-btn" id="btn-nav-posttest" type="button">Post-Test</button>
+        <button class="nav-btn" id="btn-nav-teacher" type="button">Mode Riset/Guru</button>
+      </nav>
+
+      <div class="header-actions">
+        <div class="header-progress-wrap" title="Status Kemajuan 4 Pertemuan">
+          <span class="header-progress-label" id="header-progress-text">0 / 4 Pertemuan</span>
+          <div class="header-progress-track">
+            <div class="header-progress-bar" id="header-progress-bar"></div>
+          </div>
+        </div>
+
+        <button class="student-badge" id="btn-student-profile" type="button" title="Ganti Profil Siswa">
+          <span class="student-badge-avatar" id="student-avatar-letter">S</span>
+          <span id="student-nav-name">Belum Masuk</span>
+        </button>
+
+        <button class="icon-btn" id="btn-presentation-mode" type="button" title="Mode Guru / Proyektor" aria-label="Mode Guru">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        </button>
+
+        <button class="icon-btn" id="btn-theme-toggle" type="button" title="Ganti Tema" aria-label="Ganti Tema">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       MAIN APP VIEWPORT
+       ========================================================================== -->
+  <main id="app-viewport" role="main">
+
+    <!-- VIEW: LANDING -->
+    <section id="view-landing" class="view-section active">
+      <div style="padding: 4.5rem 0 3.5rem; text-align: center; background: radial-gradient(circle at 50% 20%, var(--surface-hover) 0%, var(--bg) 75%); border-bottom: 1px solid var(--border-subtle);">
+        <div class="container">
+          <span class="badge badge-primary" style="margin-bottom: 1.25rem;">INTERACTIVE CYBERSECURITY LEARNING</span>
+          <h1 style="font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; max-width: 850px; margin: 0 auto 1.25rem;">
+            Understand the Attack.<br>
+            Analyze the Evidence.<br>
+            <span style="color: var(--primary);">Solve the Problem.</span>
+          </h1>
+          <p style="font-size: 1.1rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 2.25rem; line-height: 1.6;">
+            Pelajari konsep <strong>Intrusion Detection System (IDS)</strong> melalui pendekatan problem solving <strong>LAPS-Heuristik</strong> untuk mengasah kemampuan berpikir kritis Anda dalam mendeteksi dan menginvestigasi insiden keamanan jaringan.
+          </p>
+          <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <button class="btn btn-primary btn-lg" id="btn-landing-start" type="button">Mulai Pembelajaran &rarr;</button>
+            <button class="btn btn-secondary btn-lg" id="btn-landing-pretest" type="button">Kerjakan Diagnostic Pre-Test</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: LOGIN (IDENTITAS SISWA) -->
+    <section id="view-login" class="view-section">
+      <div class="container">
+        <div style="max-width: 520px; margin: 4rem auto; background-color: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2.25rem; box-shadow: var(--shadow-lg);">
+          <div style="text-align: center; margin-bottom: 1.75rem;">
+            <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-primary);">Identitas Pembelajaran Siswa</h2>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.35rem;">Masukkan data diri Anda untuk memulai sesi belajar interaktif IDS</p>
+          </div>
+
+          <div id="existing-session-box" style="display: none; background-color: var(--primary-light); border: 1px solid var(--primary-border); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem; text-align: center;">
+            <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;" id="existing-session-text">Data tersimpan: Nama Siswa</p>
+            <div style="display: flex; gap: 0.5rem; justify-content: center;">
+              <button class="btn btn-primary btn-sm" id="btn-continue-session" type="button">Lanjutkan Pembelajaran</button>
+              <button class="btn btn-secondary btn-sm" id="btn-switch-identity" type="button">Ganti Identitas</button>
+            </div>
+          </div>
+
+          <form id="student-identity-form" onsubmit="return false;">
+            <div style="margin-bottom: 1.25rem;">
+              <label for="input-student-name" style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.4rem;">Nama Lengkap <span style="color: var(--danger);">*</span></label>
+              <input type="text" id="input-student-name" style="width: 100%; padding: 0.65rem 0.85rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface);" placeholder="Contoh: Muhammad Rizki" required>
+            </div>
+            <div style="margin-bottom: 1.25rem;">
+              <label for="input-student-class" style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.4rem;">Kelas <span style="color: var(--danger);">*</span></label>
+              <input type="text" id="input-student-class" value="XI TJKT 1" style="width: 100%; padding: 0.65rem 0.85rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface);" required>
+            </div>
+            <div style="margin-bottom: 1.25rem;">
+              <label for="input-student-number" style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.4rem;">Nomor Absen <span style="color: var(--danger);">*</span></label>
+              <input type="number" id="input-student-number" min="1" max="50" style="width: 100%; padding: 0.65rem 0.85rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface);" placeholder="Contoh: 18" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">Masuk ke Pembelajaran</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: DASHBOARD -->
+    <section id="view-dashboard" class="view-section">
+      <div class="container">
+        <div style="padding: 2rem 0 1.5rem; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1.25rem; border-bottom: 1px solid var(--border-subtle); margin-bottom: 2rem;">
+          <div>
+            <h1 style="font-size: 1.75rem; font-weight: 800; color: var(--text-primary);">IDS LAB Dashboard</h1>
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">Selamat datang, <strong id="dash-student-name">Siswa</strong> (<span id="dash-student-class">XI TJKT</span>). Pantau aktivitas belajar dan riset Anda.</p>
+          </div>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button class="btn btn-secondary btn-sm" id="btn-dash-export-record" type="button" onclick="app.openModal('modal-summary')">Rekap Aktivitas</button>
+            <button class="btn btn-secondary btn-sm" id="btn-dash-reset-record" type="button" onclick="app.openModal('modal-reset')">Reset Progress</button>
+          </div>
+        </div>
+
+        <!-- 4 Stats Cards -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem;">
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.25rem;">
+            <div style="font-size: 0.775rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Progress Pertemuan</div>
+            <div style="font-size: 1.75rem; font-weight: 800; color: var(--text-primary);" id="stat-progress-val">0 / 4</div>
+            <div style="font-size: 0.75rem; color: var(--text-secondary);" id="stat-progress-sub">0% kurikulum selesai</div>
+          </div>
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.25rem;">
+            <div style="font-size: 0.775rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Aktivitas Evaluatif</div>
+            <div style="font-size: 1.75rem; font-weight: 800; color: var(--text-primary);" id="stat-completed-activities">0 / 31</div>
+            <div style="font-size: 0.75rem; color: var(--text-secondary);">Log, Quiz, Triage, Case</div>
+          </div>
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.25rem;">
+            <div style="font-size: 0.775rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Diagnostic Pre-Test</div>
+            <div style="font-size: 1.75rem; font-weight: 800; color: var(--text-primary);" id="stat-pretest-score">-</div>
+            <div style="font-size: 0.75rem; color: var(--text-secondary);" id="stat-pretest-sub">10 Soal Diagnostik</div>
+          </div>
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.25rem;">
+            <div style="font-size: 0.775rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Final Post-Test</div>
+            <div style="font-size: 1.75rem; font-weight: 800; color: var(--text-primary);" id="stat-posttest-score">-</div>
+            <div style="font-size: 0.75rem; color: var(--text-secondary);" id="stat-posttest-sub">12 Soal Evaluasi Akhir</div>
+          </div>
+        </div>
+
+        <!-- 4 Meeting Cards -->
+        <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.5rem;">Alur Belajar Berbasis LAPS-Heuristik</h2>
+        <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1.5rem;">Navigasi terbuka. Anda bebas memilih pertemuan atau meninjau kembali aktivitas yang telah dikerjakan.</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+          <!-- Card M1 -->
+          <div class="content-box" style="margin-bottom: 0; cursor: pointer;" onclick="app.navigateTo('meeting-1')">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <span class="badge badge-primary">LAPS STAGE 01</span>
+              <span class="badge badge-neutral" id="status-badge-m1">NOT STARTED</span>
+            </div>
+            <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 0.35rem;">Pertemuan 01</h3>
+            <div style="font-size: 0.95rem; font-weight: 700; color: var(--primary); background: var(--primary-light); padding: 0.4rem 0.65rem; border-radius: var(--radius-sm); margin-bottom: 0.75rem;">"Apa masalahnya?"</div>
+            <p style="font-size: 0.825rem; color: var(--text-secondary); margin-bottom: 1rem;">Memahami IDS, NIDS vs HIDS, Log Inspector interaktif, 4 Soal Penalaran, dan Kasus Misleading Evidence (8 aktivitas).</p>
+            <button class="btn btn-secondary btn-sm" style="width: 100%;">Masuk Pertemuan 1 &rarr;</button>
+          </div>
+
+          <!-- Card M2 -->
+          <div class="content-box" style="margin-bottom: 0; cursor: pointer;" onclick="app.navigateTo('meeting-2')">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <span class="badge badge-primary">LAPS STAGE 02</span>
+              <span class="badge badge-neutral" id="status-badge-m2">NOT STARTED</span>
+            </div>
+            <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 0.35rem;">Pertemuan 02</h3>
+            <div style="font-size: 0.95rem; font-weight: 700; color: var(--primary); background: var(--primary-light); padding: 0.4rem 0.65rem; border-radius: var(--radius-sm); margin-bottom: 0.75rem;">"Adakah alternatif pemecahan?"</div>
+            <p style="font-size: 0.825rem; color: var(--text-secondary); margin-bottom: 1rem;">Signature vs Anomaly Detection, 4 Soal Trade-Off (Coverage vs False Positives vs Workload), dan Kasus Pemilihan Strategi (8 aktivitas).</p>
+            <button class="btn btn-secondary btn-sm" style="width: 100%;">Masuk Pertemuan 2 &rarr;</button>
+          </div>
+
+          <!-- Card M3 -->
+          <div class="content-box" style="margin-bottom: 0; cursor: pointer;" onclick="app.navigateTo('meeting-3')">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <span class="badge badge-primary">LAPS STAGE 03</span>
+              <span class="badge badge-neutral" id="status-badge-m3">NOT STARTED</span>
+            </div>
+            <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 0.35rem;">Pertemuan 03</h3>
+            <div style="font-size: 0.95rem; font-weight: 700; color: var(--primary); background: var(--primary-light); padding: 0.4rem 0.65rem; border-radius: var(--radius-sm); margin-bottom: 0.75rem;">"Bagaimana mengerjakannya?"</div>
+            <p style="font-size: 0.825rem; color: var(--text-secondary); margin-bottom: 1rem;">SOC Alert Triage Dashboard dengan opsi "Need More Evidence", Unlocking Context (Baseline, Syslog), dan Analisis Komparatif (8 aktivitas).</p>
+            <button class="btn btn-secondary btn-sm" style="width: 100%;">Masuk Pertemuan 3 &rarr;</button>
+          </div>
+
+          <!-- Card M4 -->
+          <div class="content-box" style="margin-bottom: 0; cursor: pointer;" onclick="app.navigateTo('meeting-4')">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <span class="badge badge-primary">LAPS STAGE 04</span>
+              <span class="badge badge-neutral" id="status-badge-m4">NOT STARTED</span>
+            </div>
+            <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 0.35rem;">Pertemuan 04</h3>
+            <div style="font-size: 0.95rem; font-weight: 700; color: var(--primary); background: var(--primary-light); padding: 0.4rem 0.65rem; border-radius: var(--radius-sm); margin-bottom: 0.75rem;">"Apakah solusi ini tepat?"</div>
+            <p style="font-size: 0.825rem; color: var(--text-secondary); margin-bottom: 1rem;">Blue Team Multi-Stage Incident Response, 5 Validation Questions, CTF Flag Verification, dan Sintesis Refleksi Kritis (7 aktivitas).</p>
+            <button class="btn btn-secondary btn-sm" style="width: 100%;">Masuk Pertemuan 4 &rarr;</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: PRE-TEST (DIAGNOSTIC ASSESSMENT) -->
+    <section id="view-pretest" class="view-section">
+      <div class="container">
+        <div class="content-box" style="margin-top: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h1 style="font-size: 1.5rem; font-weight: 800;">Diagnostic Pre-Test (10 Soal)</h1>
+            <span class="badge badge-info">INSTRUMEN AWAL PENELITIAN</span>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6;">
+            Pre-test ini bertujuan mengetahui tingkat pemahaman awal Anda sebelum mempelajari materi Intrusion Detection System. Pada tes diagnostik ini, kunci jawaban dan pembahasan tidak ditampilkan setelah setiap butir soal. Jawablah secara objektif.
+          </p>
+
+          <div id="pretest-questions-container"></div>
+
+          <div style="margin-top: 2rem; display: flex; justify-content: flex-end; gap: 1rem;">
+            <button class="btn btn-secondary" onclick="app.navigateTo('dashboard')">Kembali ke Dashboard</button>
+            <button class="btn btn-primary" id="btn-submit-pretest" onclick="app.submitAssessment('pretest')">Kirim Jawaban Pre-Test</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: POST-TEST (FINAL ASSESSMENT) -->
+    <section id="view-posttest" class="view-section">
+      <div class="container">
+        <div class="content-box" style="margin-top: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h1 style="font-size: 1.5rem; font-weight: 800;">Post-Test: Evaluasi Akhir (12 Soal)</h1>
+            <span class="badge badge-success">POST-INTERVENTION ASSESSMENT</span>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6;">
+            Post-test ini mengevaluasi kemampuan penalaran dan analisis Anda setelah menyelesaikan 4 tahapan LAPS-Heuristik pada materi IDS. Soal menggunakan konteks dan bukti insiden baru yang berbeda dari sesi latihan.
+          </p>
+
+          <div id="posttest-questions-container"></div>
+
+          <div style="margin-top: 2rem; display: flex; justify-content: flex-end; gap: 1rem;">
+            <button class="btn btn-secondary" onclick="app.navigateTo('dashboard')">Kembali ke Dashboard</button>
+            <button class="btn btn-success" id="btn-submit-posttest" onclick="app.submitAssessment('posttest')">Kirim Jawaban Post-Test</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: PERTEMUAN 1 — MEMAHAMI MASALAH -->
+    <section id="view-meeting-1" class="view-section">
+      <div class="container">
+        <div class="meeting-container">
+          <aside class="meeting-sidebar">
+            <div class="sidebar-header">
+              <div class="sidebar-meeting-label">PERTEMUAN 01</div>
+              <div class="sidebar-meeting-title">Memahami Masalah</div>
+            </div>
+            <nav class="sidebar-menu">
+              <a href="#m1-context" class="sidebar-link active"><span class="sidebar-link-num">01</span> Pertanyaan Heuristik</a>
+              <a href="#m1-objectives" class="sidebar-link"><span class="sidebar-link-num">02</span> Learning Objectives</a>
+              <a href="#m1-material" class="sidebar-link"><span class="sidebar-link-num">03</span> Materi NIDS vs HIDS</a>
+              <a href="#m1-evidence" class="sidebar-link"><span class="sidebar-link-num">04</span> Realistic Evidence</a>
+              <a href="#m1-activities" class="sidebar-link"><span class="sidebar-link-num">05</span> Bank Aktivitas (8)</a>
+            </nav>
+            <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+              <button class="btn btn-secondary btn-sm" style="width: 100%;" onclick="app.navigateTo('dashboard')">&larr; Kembali ke Dashboard</button>
+            </div>
+          </aside>
+
+          <div class="meeting-main">
+            <!-- Heuristic Hero -->
+            <div class="heuristic-hero" id="m1-context">
+              <span class="badge badge-primary heuristic-stage-badge">LAPS-HEURISTIK: TAHAP 1</span>
+              <h1 class="heuristic-title">"Apa masalahnya?"</h1>
+              <p class="heuristic-subtitle">
+                Server otentikasi sekolah mendadak lambat dan log jaringan mendeteksi serangkaian peringatan. Sebelum melakukan pemblokiran sembarangan, identifikasi bukti objektif: Apa sifat masalahnya? Siapa pelakunya? Dan pola apa yang teramati?
+              </p>
+              <div class="critical-thinking-aspect">
+                <span class="thinking-pill-dot"></span>
+                <span>Aspek Berpikir Kritis yang Dilatih: <strong>Interpretation</strong> & <strong>Analysis</strong></span>
+              </div>
+            </div>
+
+            <!-- Objectives -->
+            <div class="learning-objectives-box" id="m1-objectives">
+              <div class="objectives-title">Learning Objectives Pertemuan 1</div>
+              <ul class="objectives-list">
+                <li>Siswa mampu menjelaskan definisi serta fungsi operasional Intrusion Detection System (IDS).</li>
+                <li>Siswa mampu membedakan karakteristik arsitektur Network-Based IDS (NIDS) dan Host-Based IDS (HIDS).</li>
+                <li>Siswa mampu mengidentifikasi parameter krusial pada alert IDS (SRC, DST, PORT, PROTO, SIG, SEVERITY, COUNT).</li>
+                <li>Siswa mampu menafsirkan bukti log secara kritis dan membedakan bukti esensial dari misleading evidence.</li>
+              </ul>
+            </div>
+
+            <!-- Material Core -->
+            <div class="content-box" id="m1-material">
+              <h2 class="content-box-title">Materi 1: Arsitektur & Komponen IDS</h2>
+              <p style="margin-bottom: 1rem;">
+                <strong>Intrusion Detection System (IDS)</strong> berfungsi sebagai pengawas pasif yang memantau paket data atau log sistem guna mendeteksi pelanggaran keamanan atau anomali operasional.
+              </p>
+              
+              <!-- Comparison Table -->
+              <div class="table-responsive">
+                <table class="comparison-table">
+                  <thead>
+                    <tr>
+                      <th>Karakteristik</th>
+                      <th>Network-Based IDS (NIDS)</th>
+                      <th>Host-Based IDS (HIDS)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Posisi Sensor</strong></td>
+                      <td>Titik strategis jaringan (Switch mirror / TAP).</td>
+                      <td>Terpasang langsung pada OS host/endpoint.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Visibilitas</strong></td>
+                      <td>Seluruh lalu lintas subnet (Network visibility).</td>
+                      <td>Syslog lokal, modifikasi file, registry (Host visibility).</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Tantangan Enkripsi</strong></td>
+                      <td>Sulit memeriksa muatan terenkripsi (HTTPS/SSH).</td>
+                      <td>Mampu membaca aktivitas sebelum dienkripsi / setelah didekripsi.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Evidence Section with Clickable Tokens -->
+            <div class="content-box" id="m1-evidence">
+              <h2 class="content-box-title">Realistic Evidence: Suricata / Snort Alert Stream</h2>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                Klik kata kunci yang bergaris bawah pada terminal di bawah untuk memeriksa interpretasi analis:
+              </p>
+
+              <div class="terminal-container">
+                <div class="terminal-header">
+                  <div class="terminal-dots">
+                    <span class="terminal-dot dot-red"></span>
+                    <span class="terminal-dot dot-yellow"></span>
+                    <span class="terminal-dot dot-green"></span>
+                  </div>
+                  <div class="terminal-title">fast.log — Simulated NIDS Capture</div>
+                </div>
+                <div class="terminal-body">
+                  <code>
+                    2026-09-25 08:14:32 [<span class="token-hl-alert">ALERT</span>] [1:2001219:2] <br>
+                    <span class="log-token token-hl-key" onclick="app.inspectToken('SRC', '192.168.1.45', 'Alamat IP sumber pengirim dalam jaringan lokal laboratorium.')">SRC=192.168.1.45</span> 
+                    &rarr; 
+                    <span class="log-token token-hl-key" onclick="app.inspectToken('DST', '192.168.1.10:22', 'Port 22 merupakan port standar Secure Shell (SSH).')">DST=192.168.1.10:22</span> <br>
+                    <span class="log-token token-hl-key" onclick="app.inspectToken('PROTO', 'TCP', 'Protokol transport berorientasi koneksi.')">PROTO=TCP</span> <br>
+                    <span class="log-token token-hl-alert" onclick="app.inspectToken('SIG', 'SSH Authentication Failure', 'Aturan pendeteksi kegagalan otentikasi SSH.')">SIG="SSH Authentication Failure"</span> <br>
+                    <span class="log-token token-hl-val" onclick="app.inspectToken('COUNT', '47', 'Jumlah percobaan dalam interval 30 detik.')">COUNT=47</span>
+                  </code>
+                </div>
+              </div>
+
+              <div id="token-inspector" class="token-inspector-box">
+                <div class="token-inspector-title" id="inspector-field-name">FIELD: -</div>
+                <div id="inspector-field-desc">-</div>
+              </div>
+            </div>
+
+            <!-- 8 Bank Activities for Meeting 1 -->
+            <div class="content-box" id="m1-activities">
+              <h2 class="content-box-title">Bank Soal & Aktivitas Penalaran (8 Aktivitas)</h2>
+              <div id="m1-questions-list"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: PERTEMUAN 2 — MERENCANAKAN PEMECAHAN -->
+    <section id="view-meeting-2" class="view-section">
+      <div class="container">
+        <div class="meeting-container">
+          <aside class="meeting-sidebar">
+            <div class="sidebar-header">
+              <div class="sidebar-meeting-label">PERTEMUAN 02</div>
+              <div class="sidebar-meeting-title">Merencanakan Pemecahan</div>
+            </div>
+            <nav class="sidebar-menu">
+              <a href="#m2-context" class="sidebar-link active"><span class="sidebar-link-num">01</span> Pertanyaan Heuristik</a>
+              <a href="#m2-objectives" class="sidebar-link"><span class="sidebar-link-num">02</span> Learning Objectives</a>
+              <a href="#m2-material" class="sidebar-link"><span class="sidebar-link-num">03</span> Signature vs Anomaly</a>
+              <a href="#m2-activities" class="sidebar-link"><span class="sidebar-link-num">04</span> Bank Aktivitas (8)</a>
+            </nav>
+            <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+              <button class="btn btn-secondary btn-sm" style="width: 100%;" onclick="app.navigateTo('dashboard')">&larr; Kembali ke Dashboard</button>
+            </div>
+          </aside>
+
+          <div class="meeting-main">
+            <!-- Heuristic Hero -->
+            <div class="heuristic-hero" id="m2-context">
+              <span class="badge badge-primary heuristic-stage-badge">LAPS-HEURISTIK: TAHAP 2</span>
+              <h1 class="heuristic-title">"Adakah alternatif pemecahan masalah?"</h1>
+              <p class="heuristic-subtitle">
+                Tidak ada solusi pertahanan tunggal yang serba sempurna. Dalam merencanakan konfigurasi IDS sekolah, bandingkan trade-off antara deteksi berbasis tanda tangan (Signature-Based) dan deteksi berbasis anomali (Anomaly-Based).
+              </p>
+              <div class="critical-thinking-aspect">
+                <span class="thinking-pill-dot"></span>
+                <span>Aspek Berpikir Kritis yang Dilatih: <strong>Analysis</strong> & <strong>Evaluation</strong></span>
+              </div>
+            </div>
+
+            <!-- Objectives -->
+            <div class="learning-objectives-box" id="m2-objectives">
+              <div class="objectives-title">Learning Objectives Pertemuan 2</div>
+              <ul class="objectives-list">
+                <li>Siswa mampu menjelaskan prinsip operasional Signature-Based vs Anomaly-Based Detection.</li>
+                <li>Siswa mampu mengevaluasi trade-off (cakupan deteksi vs false positive vs beban kerja operasional).</li>
+                <li>Siswa mampu memilih pendekatan deteksi yang relevan dengan konteks skenario serangan nyata.</li>
+              </ul>
+            </div>
+
+            <!-- Material Core -->
+            <div class="content-box" id="m2-material">
+              <h2 class="content-box-title">Materi 2: Trade-Off Paradigma Deteksi</h2>
+              <div class="table-responsive">
+                <table class="comparison-table">
+                  <thead>
+                    <tr>
+                      <th>Dimensi Pertimbangan</th>
+                      <th>Signature-Based</th>
+                      <th>Anomaly-Based</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Deteksi Serangan Dikenal (Known CVE)</strong></td>
+                      <td>Sangat cepat dan akurat (False Positive rendah).</td>
+                      <td>Cukup efektif, namun rentan fluktuasi baseline.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Deteksi Serangan Baru (Zero-Day)</strong></td>
+                      <td>Gagal mendeteksi karena belum ada pola biner.</td>
+                      <td>Mampu mengenali deviasi lonjakan volume/pola.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Beban Operasional SOC</strong></td>
+                      <td>Rendah (Aturan jelas dan terdokumentasi).</td>
+                      <td>Tinggi (Memerlukan analisis investigasi FP berulang).</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- 8 Bank Activities for Meeting 2 -->
+            <div class="content-box" id="m2-activities">
+              <h2 class="content-box-title">Bank Soal & Aktivitas Trade-Off (8 Aktivitas)</h2>
+              <div id="m2-questions-list"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: PERTEMUAN 3 — MELAKSANAKAN RENCANA -->
+    <section id="view-meeting-3" class="view-section">
+      <div class="container">
+        <div class="meeting-container">
+          <aside class="meeting-sidebar">
+            <div class="sidebar-header">
+              <div class="sidebar-meeting-label">PERTEMUAN 03</div>
+              <div class="sidebar-meeting-title">Melaksanakan Rencana</div>
+            </div>
+            <nav class="sidebar-menu">
+              <a href="#m3-context" class="sidebar-link active"><span class="sidebar-link-num">01</span> Pertanyaan Heuristik</a>
+              <a href="#m3-objectives" class="sidebar-link"><span class="sidebar-link-num">02</span> Learning Objectives</a>
+              <a href="#m3-7-context" class="sidebar-link"><span class="sidebar-link-num">03</span> 7 Konteks Infrastruktur</a>
+              <a href="#m3-triage-dash" class="sidebar-link"><span class="sidebar-link-num">04</span> SOC Alert Triage (3)</a>
+              <a href="#m3-activities" class="sidebar-link"><span class="sidebar-link-num">05</span> Bank Aktivitas (5)</a>
+            </nav>
+            <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+              <button class="btn btn-secondary btn-sm" style="width: 100%;" onclick="app.navigateTo('dashboard')">&larr; Kembali ke Dashboard</button>
+            </div>
+          </aside>
+
+          <div class="meeting-main">
+            <!-- Heuristic Hero -->
+            <div class="heuristic-hero" id="m3-context">
+              <span class="badge badge-primary heuristic-stage-badge">LAPS-HEURISTIK: TAHAP 3</span>
+              <h1 class="heuristic-title">"Bagaimana sebaiknya mengerjakannya?"</h1>
+              <p class="heuristic-subtitle">
+                Di pusat operasi keamanan (SOC), keputusan tidak selalu hitam-putih. Lakukan alert triage: Apakah suatu peringatan adalah True Positive, False Positive, ataukah kita membutuhkan bukti tambahan (Need More Evidence)?
+              </p>
+              <div class="critical-thinking-aspect">
+                <span class="thinking-pill-dot"></span>
+                <span>Aspek Berpikir Kritis yang Dilatih: <strong>Evaluation</strong> & <strong>Inference</strong></span>
+              </div>
+            </div>
+
+            <!-- Objectives -->
+            <div class="learning-objectives-box" id="m3-objectives">
+              <div class="objectives-title">Learning Objectives Pertemuan 3</div>
+              <ul class="objectives-list">
+                <li>Siswa mampu menjelaskan perbedaan esensial True Positive (TP) dan False Positive (FP).</li>
+                <li>Siswa mampu menerapkan kerangka <strong>7 Konteks Infrastruktur</strong> untuk menganalisis alert keamanan secara objektif.</li>
+                <li>Siswa mampu melakukan triase alert kontekstual dengan mempertimbangkan baseline dan jadwal operasional.</li>
+                <li>Siswa mampu mengidentifikasi kasus ambigu dan mengekstrak bukti tambahan sebelum mengambil keputusan final.</li>
+              </ul>
+            </div>
+
+            <!-- 7 CONTEXT IMPLEMENTATION FOR INFRASTRUCTURE -->
+            <div class="content-box" id="m3-7-context">
+              <h2 class="content-box-title">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                7 Dimensi Konteks Infrastruktur dalam IDS & SOC Alert Triage
+              </h2>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.25rem; line-height: 1.6;">
+                Sebuah alert IDS mentah (<em>raw alert</em>) hanya memuat fakta teknis dasar seperti IP dan Port. Tanpa konteks infrastruktur, seorang teknisi rawan melakukan pemblokiran keliru (False Positive) atau melewatkan serangan berbahaya. Klik ke-7 pilar konteks infrastruktur di bawah untuk mengeksplorasi dimensi analisisnya:
+              </p>
+
+              <!-- 7 Context Pills Grid -->
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.5rem; margin-bottom: 1.25rem;" id="context-pills-bar">
+                <button class="btn btn-secondary btn-sm active" style="font-weight: 700; border-color: var(--primary); background: var(--primary-light); color: var(--primary);" id="btn-ctx-1" onclick="app.showInfrastructureContext(1)">1. Topologi & Zona</button>
+                <button class="btn btn-secondary btn-sm" style="font-weight: 700;" id="btn-ctx-2" onclick="app.showInfrastructureContext(2)">2. Peran Aset</button>
+                <button class="btn btn-secondary btn-sm" style="font-weight: 700;" id="btn-ctx-3" onclick="app.showInfrastructureContext(3)">3. Waktu Operasional</button>
+                <button class="btn btn-secondary btn-sm" style="font-weight: 700;" id="btn-ctx-4" onclick="app.showInfrastructureContext(4)">4. Identitas & User</button>
+                <button class="btn btn-secondary btn-sm" style="font-weight: 700;" id="btn-ctx-5" onclick="app.showInfrastructureContext(5)">5. Baseline Trafik</button>
+                <button class="btn btn-secondary btn-sm" style="font-weight: 700;" id="btn-ctx-6" onclick="app.showInfrastructureContext(6)">6. Port & Vuln</button>
+                <button class="btn btn-secondary btn-sm" style="font-weight: 700;" id="btn-ctx-7" onclick="app.showInfrastructureContext(7)">7. Threat Intel</button>
+              </div>
+
+              <!-- Dynamic Context Detail Card -->
+              <div id="context-detail-display" style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.25rem; animation: fadeIn var(--transition-fast);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                  <span class="badge badge-primary" id="ctx-badge-num">KONTEKS 1 DARI 7</span>
+                  <span style="font-size: 0.775rem; color: var(--text-muted);" id="ctx-academic-ref">SANS NSM & NIST SP 800-94 Framework</span>
+                </div>
+                <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.5rem;" id="ctx-title">Network Topology & Zone Context (Topologi & Zona Jaringan)</h3>
+                <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0.75rem;" id="ctx-desc">
+                  Menganalisis posisi segmen IP, VLAN, dan lokasi sensor NIDS (Perimeter, DMZ, Server Farm, atau Lab Komputer Siswa). Menentukan apakah lalu lintas bersifat eksternal melintasi internet atau pergerakan lateral (lateral movement) di dalam jaringan lokal.
+                </p>
+                <div style="background: var(--surface); padding: 0.75rem 1rem; border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 0.825rem; margin-bottom: 0.5rem;" id="ctx-question">
+                  <strong>Pertanyaan Heuristik Analis:</strong> "Dari zona jaringan mana paket ini berasal dan ke mana tujuannya? Apakah ada pelanggaran kebijakan isolasi antar-subnet?"
+                </div>
+                <div style="font-size: 0.825rem; color: var(--text-primary);" id="ctx-case">
+                  <strong>Contoh Kasus Infrastruktur SMK:</strong> Paket dari subnet Lab Siswa (192.168.1.0/24) yang mencoba koneksi langsung ke subnet Server Nilai (192.168.10.0/24) tanpa melewati firewall routing merupakan indikasi lateral movement mencurigakan.
+                </div>
+              </div>
+            </div>
+
+            <!-- SOC Alert Triage Interface with "Need More Evidence" -->
+            <div class="content-box" id="m3-triage-dash">
+              <h2 class="content-box-title">SOC Alert Triage Dashboard (3 Kasus Realistis)</h2>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                Tentukan klasifikasi untuk masing-masing peringatan di bawah. Pada kasus ambigu, Anda dapat meminta bukti tambahan sebelum memutuskan:
+              </p>
+
+              <!-- Alert 1 -->
+              <div class="triage-card" id="triage-card-1">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                  <span class="badge badge-danger">ALERT #001 — CRITICAL</span>
+                  <span style="font-size: 0.8rem; color: var(--text-muted);">TIME=10:12 WIB</span>
+                </div>
+                <div style="background: var(--terminal-bg); padding: 0.85rem; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.825rem; color: var(--terminal-text); margin-bottom: 0.75rem;">
+                  SRC=10.10.10.23 &rarr; DST=10.10.10.5:22<br>
+                  FAILED_LOGIN=83 attempts | DURATION=2 minutes | USERNAMES=root,admin,test<br>
+                  CONTEXT=Tidak ada jadwal maintenance pada jam operasional KBM.
+                </div>
+                <div class="triage-btn-group">
+                  <button class="triage-action-btn" id="btn-t1-tp" onclick="app.handleTriage(1, 'TP')">TRUE POSITIVE</button>
+                  <button class="triage-action-btn" id="btn-t1-fp" onclick="app.handleTriage(1, 'FP')">FALSE POSITIVE</button>
+                  <button class="triage-action-btn" id="btn-t1-nme" onclick="app.handleTriage(1, 'NME')">NEED MORE EVIDENCE</button>
+                </div>
+                <div id="triage-feedback-1" class="structured-feedback"></div>
+              </div>
+
+              <!-- Alert 2 -->
+              <div class="triage-card" id="triage-card-2">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                  <span class="badge badge-warning">ALERT #002 — TRAFFIC SPIKE</span>
+                  <span style="font-size: 0.8rem; color: var(--text-muted);">TIME=07:00 WIB</span>
+                </div>
+                <div style="background: var(--terminal-bg); padding: 0.85rem; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.825rem; color: var(--terminal-text); margin-bottom: 0.75rem;">
+                  SOURCE=10.10.20.0/24 (Subnet Access Point Siswa & Guru) | TRAFFIC_VOLUME=1.8 GB<br>
+                  PACKET_TYPE=Standard HTTPS/DHCP/DNS | ANOMALY=Volume melebihi baseline malam hari 1200%<br>
+                  CONTEXT=Pukul 07:00 merupakan jam gerbang sekolah dibuka dan 500 siswa serentak terhubung Wi-Fi.
+                </div>
+                <div class="triage-btn-group">
+                  <button class="triage-action-btn" id="btn-t2-tp" onclick="app.handleTriage(2, 'TP')">TRUE POSITIVE</button>
+                  <button class="triage-action-btn" id="btn-t2-fp" onclick="app.handleTriage(2, 'FP')">FALSE POSITIVE</button>
+                  <button class="triage-action-btn" id="btn-t2-nme" onclick="app.handleTriage(2, 'NME')">NEED MORE EVIDENCE</button>
+                </div>
+                <div id="triage-feedback-2" class="structured-feedback"></div>
+              </div>
+
+              <!-- Alert 3 (Ambiguous with Evidence Unlock) -->
+              <div class="triage-card" id="triage-card-3">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                  <span class="badge badge-info">ALERT #003 — PORT SCANNING DETECTED</span>
+                  <span style="font-size: 0.8rem; color: var(--text-muted);">TIME=14:30 WIB</span>
+                </div>
+                <div style="background: var(--terminal-bg); padding: 0.85rem; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.825rem; color: var(--terminal-text); margin-bottom: 0.75rem;">
+                  SIG="Nmap SYN Scan Detected" | SRC=10.10.10.44 &rarr; TARGETS=5 internal servers<br>
+                  PORTS_SCANNED=12 ports (21, 22, 80, 443, 3389, etc.)<br>
+                  IDENTITY_TAG=Workstation Administrator Jaringan Utama
+                </div>
+
+                <div class="evidence-unlock-panel">
+                  <div style="font-weight: 700; font-size: 0.85rem; color: var(--info-text); margin-bottom: 0.35rem;">Investigasi Bukti Tambahan (SOC Context Drill-Down):</div>
+                  <div class="evidence-buttons-row">
+                    <button class="btn btn-secondary btn-sm" onclick="app.unlockEvidence('endpoint')">Buka Konteks Endpoint</button>
+                    <button class="btn btn-secondary btn-sm" onclick="app.unlockEvidence('auth')">Buka Syslog Otentikasi</button>
+                    <button class="btn btn-secondary btn-sm" onclick="app.unlockEvidence('baseline')">Buka Tiket Perubahan IT</button>
+                  </div>
+                  <div id="unlocked-evidence-stream"></div>
+                </div>
+
+                <div class="triage-btn-group" style="margin-top: 1rem;">
+                  <button class="triage-action-btn" id="btn-t3-tp" onclick="app.handleTriage(3, 'TP')">TRUE POSITIVE</button>
+                  <button class="triage-action-btn" id="btn-t3-fp" onclick="app.handleTriage(3, 'FP')">FALSE POSITIVE (Sah)</button>
+                  <button class="triage-action-btn" id="btn-t3-nme" onclick="app.handleTriage(3, 'NME')">NEED MORE EVIDENCE</button>
+                </div>
+                <div id="triage-feedback-3" class="structured-feedback"></div>
+              </div>
+            </div>
+
+            <!-- Remaining 5 Bank Activities for Meeting 3 -->
+            <div class="content-box" id="m3-activities">
+              <h2 class="content-box-title">Soal Penalaran & Komparatif Kasus (5 Aktivitas)</h2>
+              <div id="m3-questions-list"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: PERTEMUAN 4 — MENINJAU KEMBALI -->
+    <section id="view-meeting-4" class="view-section">
+      <div class="container">
+        <div class="meeting-container">
+          <aside class="meeting-sidebar">
+            <div class="sidebar-header">
+              <div class="sidebar-meeting-label">PERTEMUAN 04</div>
+              <div class="sidebar-meeting-title">Meninjau Kembali</div>
+            </div>
+            <nav class="sidebar-menu">
+              <a href="#m4-context" class="sidebar-link active"><span class="sidebar-link-num">01</span> Pertanyaan Heuristik</a>
+              <a href="#m4-incident" class="sidebar-link"><span class="sidebar-link-num">02</span> Insiden Blue Team</a>
+              <a href="#m4-validation" class="sidebar-link"><span class="sidebar-link-num">03</span> 5 Validation Questions</a>
+              <a href="#m4-ctf" class="sidebar-link"><span class="sidebar-link-num">04</span> CTF Flag Security</a>
+              <a href="#m4-reflection" class="sidebar-link"><span class="sidebar-link-num">05</span> Refleksi Kritis LAPS</a>
+            </nav>
+            <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+              <button class="btn btn-secondary btn-sm" style="width: 100%;" onclick="app.navigateTo('dashboard')">&larr; Kembali ke Dashboard</button>
+            </div>
+          </aside>
+
+          <div class="meeting-main">
+            <!-- Heuristic Hero -->
+            <div class="heuristic-hero" id="m4-context">
+              <span class="badge badge-primary heuristic-stage-badge">LAPS-HEURISTIK: TAHAP 4</span>
+              <h1 class="heuristic-title">"Apakah solusi ini tepat? Bagaimana kita bisa mengeceknya?"</h1>
+              <p class="heuristic-subtitle">
+                Tahap verifikasi dan metakognisi: Korelasikan multi-evidence (syslog, alert timeline, dan konteks host), jawab pertanyaan validasi, buktikan flag serangan, dan rumuskan mitigasi teknis jangka panjang.
+              </p>
+              <div class="critical-thinking-aspect">
+                <span class="thinking-pill-dot"></span>
+                <span>Aspek Berpikir Kritis: <strong>Evaluation</strong>, <strong>Explanation</strong>, & <strong>Self-Regulation</strong></span>
+              </div>
+            </div>
+
+            <!-- Integrated Incident Multi-Evidence -->
+            <div class="content-box" id="m4-incident">
+              <h2 class="content-box-title">Integrated Incident: Korelasi Bukti Multi-Timestamp</h2>
+              <div class="ctf-terminal-wrap">
+                <div style="color: var(--accent); font-weight: 700; margin-bottom: 0.5rem;">// EVIDENCE 1 & 4: AUTHENTICATION SYSLOG & TIMELINE STREAM</div>
+                <div>08:14:32 WIB [AUTH.INFO] sshd[1402]: Failed password for invalid user root from 192.168.1.45 port 49152 ssh2</div>
+                <div>08:14:35 WIB [AUTH.INFO] sshd[1405]: Failed password for invalid user admin from 192.168.1.45 port 49154 ssh2</div>
+                <div>08:14:38 WIB [AUTH.INFO] sshd[1409]: Failed password for invalid user test from 192.168.1.45 port 49156 ssh2</div>
+                <div>08:14:41 WIB [AUTH.WARN] sshd[1415]: Failed password for invalid user oracle from 192.168.1.45 port 49158 ssh2</div>
+                <div>08:15:03 WIB [ALERT.CRIT] NIDS[2001221]: SIG="SSH Brute Force Attempt" COUNT=94 DST=192.168.1.10:22</div>
+                <div style="margin-top: 0.75rem; color: #34D399;">// EVIDENCE 3 & 5: ENDPOINT HOST INVENTORY<br>
+                Host: LAB-PC-17 (IP: 192.168.1.45) | Lokasi: Laboratorium Komputer 2 | Pengguna Terdaftar: Siswa Kelas XI</div>
+              </div>
+            </div>
+
+            <!-- 5 Validation Questions Before Flag -->
+            <div class="content-box" id="m4-validation">
+              <h2 class="content-box-title">5 Pertanyaan Validasi Analisis Insiden</h2>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                Jawab seluruh 5 pertanyaan validasi analitis berikut untuk membuka kode security flag:
+              </p>
+              <div id="m4-validation-questions-list"></div>
+            </div>
+
+            <!-- CTF Flag Section -->
+            <div class="content-box" id="m4-ctf">
+              <h2 class="content-box-title">CTF Security Flag Verification</h2>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                Format flag: <code>FLAG{...}</code>. Buka petunjuk bertingkat jika memerlukan scaffolding investigasi:
+              </p>
+
+              <!-- 3 Tiered Hints -->
+              <div style="margin-bottom: 1.5rem;">
+                <div style="border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 0.5rem; overflow: hidden;">
+                  <button class="btn btn-secondary btn-sm" style="width: 100%; justify-content: space-between;" onclick="app.toggleHint(1)">
+                    <span>Petunjuk 1 (Evidence Scaffolding)</span>
+                    <span id="hint-icon-1">&darr; Buka</span>
+                  </button>
+                  <div id="hint-body-1" style="display: none; padding: 0.85rem; font-size: 0.85rem; background: var(--surface-elevated);">
+                    Perhatikan perubahan nama pengguna (root, admin, test, oracle) dan waktu interval yang hanya berselang 2-3 detik. Pola ini mustahil dilakukan manusia secara manual.
+                  </div>
+                </div>
+
+                <div style="border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 0.5rem; overflow: hidden;">
+                  <button class="btn btn-secondary btn-sm" style="width: 100%; justify-content: space-between;" onclick="app.toggleHint(2)">
+                    <span>Petunjuk 2 (Pattern Identification)</span>
+                    <span id="hint-icon-2">&darr; Buka</span>
+                  </button>
+                  <div id="hint-body-2" style="display: none; padding: 0.85rem; font-size: 0.85rem; background: var(--surface-elevated);">
+                    Kombinasi percobaan dictionary username terhadap port 22 secara masif merupakan karakteristik serangan SSH Brute Force.
+                  </div>
+                </div>
+
+                <div style="border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden;">
+                  <button class="btn btn-secondary btn-sm" style="width: 100%; justify-content: space-between;" onclick="app.toggleHint(3)">
+                    <span>Petunjuk 3 (Flag Format)</span>
+                    <span id="hint-icon-3">&darr; Buka</span>
+                  </button>
+                  <div id="hint-body-3" style="display: none; padding: 0.85rem; font-size: 0.85rem; background: var(--surface-elevated);">
+                    Ketikkan flag persis: <code>FLAG{SSH_BRUTE_FORCE_DETECTED}</code>.
+                  </div>
+                </div>
+              </div>
+
+              <div class="flag-submission-box">
+                <label for="input-flag" style="font-size: 0.85rem; font-weight: 700;">Masukkan Flag Bukti Serangan:</label>
+                <div class="flag-input-group">
+                  <input type="text" id="input-flag" class="flag-input" placeholder="FLAG{...}" autocomplete="off">
+                  <button class="btn btn-primary" id="btn-submit-flag" onclick="app.submitFlag()">Verifikasi Flag</button>
+                </div>
+                <div id="flag-feedback" style="margin-top: 0.75rem; font-size: 0.85rem; font-weight: 700; display: none;"></div>
+              </div>
+            </div>
+
+            <!-- Deep Reflection (Mandatory Completion Gate) -->
+            <div class="content-box" id="m4-reflection">
+              <h2 class="content-box-title">Tahap Refleksi Kritis LAPS-Heuristik</h2>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+                Jawab 4 pertanyaan reflektif metakognisi berikut secara menyeluruh (minimal 100 karakter):
+              </p>
+              <div style="background: var(--surface-elevated); padding: 0.85rem 1rem; border-radius: var(--radius-sm); font-size: 0.825rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+                1. Bukti apa yang membuat keputusan Anda dapat dipertanggungjawabkan?<br>
+                2. Apakah ada kemungkinan interpretasi Anda salah? Jelaskan.<br>
+                3. Bagaimana cara Anda memeriksa kembali keabsahan keputusan tersebut?<br>
+                4. Mitigasi teknis apa yang Anda rekomendasikan untuk server sekolah dan mengapa?
+              </div>
+
+              <textarea id="textarea-reflection" class="reflection-textarea" placeholder="Tuliskan refleksi kritis Anda di sini (minimal 100 karakter)..." oninput="app.updateReflectionCount()"></textarea>
+              <div class="char-counter" id="reflection-char-count">0 / 100 karakter minimum</div>
+
+              <div style="margin-top: 1.25rem; display: flex; justify-content: flex-end;">
+                <button class="btn btn-success btn-lg" id="btn-submit-reflection" onclick="app.submitReflection()">
+                  Kirim Refleksi & Tuntaskan Pembelajaran &rarr;
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       MODAL: TEACHER / RESEARCH PANEL
+       ========================================================================== -->
+  <div class="modal-backdrop" id="modal-teacher" role="dialog" aria-modal="true" aria-labelledby="modal-teacher-title">
+    <div class="modal-dialog" style="max-width: 840px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-teacher-title">Panel Peneliti & Guru (Research Mode)</h3>
+        <button class="modal-close-btn" onclick="app.closeModal('modal-teacher')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="background: var(--warning-bg); border: 1px solid var(--warning-border); padding: 0.75rem 1rem; border-radius: var(--radius-sm); font-size: 0.8rem; color: var(--warning-text); margin-bottom: 1.25rem;">
+          <strong>Pernyataan Metodologis Penelitian:</strong> Panel ini digunakan oleh guru/peneliti untuk mengamati keterlibatan siswa pada intervensi pembelajaran. Data interaksi tidak otomatis diklaim sebagai skor baku berpikir kritis tanpa instrumen tes yang divalidasi.
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: var(--surface-elevated); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+            <div style="font-size: 0.75rem; color: var(--text-muted);">DURASI AKTIF BELAJAR</div>
+            <div style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary);" id="teacher-time-spent">0 menit</div>
+          </div>
+          <div style="background: var(--surface-elevated); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+            <div style="font-size: 0.75rem; color: var(--text-muted);">EVENT LOG TERCATAT</div>
+            <div style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary);" id="teacher-event-count">0 Event</div>
+          </div>
+          <div style="background: var(--surface-elevated); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+            <div style="font-size: 0.75rem; color: var(--text-muted);">ACAK OPSI SOAL</div>
+            <div style="margin-top: 0.25rem;">
+              <button class="btn btn-secondary btn-sm" id="btn-toggle-randomize" onclick="app.toggleRandomization()">Acak: NONAKTIF (Konsisten)</button>
+            </div>
+          </div>
+        </div>
+
+        <h4 style="font-size: 0.95rem; font-weight: 800; margin-bottom: 0.5rem;">Event Log Interaksi Klien (Terbaru):</h4>
+        <div style="max-height: 220px; overflow-y: auto; background: var(--terminal-bg); color: var(--terminal-text); font-family: var(--font-mono); font-size: 0.75rem; padding: 0.85rem; border-radius: var(--radius-sm);" id="teacher-event-stream">
+          // Menunggu interaksi...
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="app.exportRecord('csv')">Ekspor Data CSV</button>
+        <button class="btn btn-primary" onclick="app.exportRecord('json')">Ekspor Data JSON</button>
+        <button class="btn btn-danger" onclick="app.openModal('modal-reset')">Reset Data Siswa</button>
+        <button class="btn btn-secondary" onclick="app.closeModal('modal-teacher')">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: SUMMARY -->
+  <div class="modal-backdrop" id="modal-summary" role="dialog" aria-modal="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">Rekap Aktivitas Pembelajaran</h3>
+        <button class="modal-close-btn" onclick="app.closeModal('modal-summary')">&times;</button>
+      </div>
+      <div class="modal-body" id="summary-modal-body"></div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="app.exportRecord('csv')">Unduh CSV</button>
+        <button class="btn btn-primary" onclick="app.exportRecord('json')">Unduh JSON</button>
+        <button class="btn btn-secondary" onclick="app.closeModal('modal-summary')">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: RESET CONFIRMATION -->
+  <div class="modal-backdrop" id="modal-reset" role="dialog" aria-modal="true">
+    <div class="modal-dialog" style="max-width: 440px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Reset Kemajuan Pembelajaran?</h3>
+        <button class="modal-close-btn" onclick="app.closeModal('modal-reset')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Apakah Anda yakin ingin menghapus seluruh progres, jawaban latihan, skor pre/post-test, dan rekaman event pada perangkat ini? Tindakan ini tidak dapat dibatalkan.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="app.closeModal('modal-reset')">Batal</button>
+        <button class="btn btn-danger" onclick="app.confirmResetProgress()">Ya, Hapus Semua Data</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- ==========================================================================
+       JAVASCRIPT APPLICATION CORE & DATA ARCHITECTURE
+       ========================================================================== -->
+  <script>
+    /**
+     * IDS LAB Application Module (ES6+)
+     * Single-file instructional platform based on LAPS-Heuristik
+     */
+    const app = (function () {
+      'use strict';
+
+      const STORAGE_KEY = 'laps_ids_student';
+      const SCHEMA_VERSION = 1;
+
+      // Obfuscated Flag String to avoid casual plaintext DevTools / Ctrl+F discovery
+      // Decodes to "FLAG{SSH_BRUTE_FORCE_DETECTED}"
+      const _ENC_FLAG = "RkxBR3tTU0hfQlJVVEVfRk9SQ0VfREVURUNURUR9";
+
+      // Misconceptions Glossary
+      const MISCONCEPTIONS = {
+        port_alone_means_attack: "Mengasumsikan bahwa semata-mata kehadiran port 22/80/443 otomatis menandakan adanya serangan, padahal port tersebut adalah layanan jaringan standar.",
+        alert_equals_attack: "Menganggap setiap alert yang dikeluarkan IDS 100% pasti merupakan serangan jahat (mengabaikan kemungkinan false positive).",
+        high_traffic_equals_ddos: "Menganggap setiap lonjakan volume lalu lintas otomatis adalah serangan DoS/DDoS, tanpa meninjau konteks operasional jadwal kedatangan/kegiatan sekolah.",
+        signature_is_always_correct: "Mengasumsikan signature-based IDS dapat mendeteksi semua varian ancaman termasuk zero-day exploit.",
+        private_ip_is_always_safe: "Menganggap alamat IP lokal (192.168.x.x / 10.x.x.x) selalu aman dan mustahil menjadi sumber serangan lateral internal."
+      };
+
+      // Default State Schema with Active Timers & Error Recovery
+      const DEFAULT_STATE = {
+        schemaVersion: SCHEMA_VERSION,
+        student: { name: '', className: '', number: '', createdAt: null },
+        currentView: 'landing',
+        timeTracking: { startedAt: Date.now(), totalActiveMs: 0 },
+        progress: { meeting1: false, meeting2: false, meeting3: false, meeting4: false },
+        scores: { meeting1: 0, meeting2: 0, meeting3: 0, meeting4: 0, pretest: null, posttest: null },
+        answers: {
+          pretest: {},
+          posttest: {},
+          m1: {},
+          m2: {},
+          m3_triage: {},
+          m3: {},
+          m4_validation: {}
+        },
+        attempts: {},
+        triageEvidenceUnlocked: [],
+        ctf: {
+          solved: false,
+          hintsUsed: [],
+          reflection: '',
+          flagSubmittedAt: null
+        },
+        settings: {
+          theme: 'system',
+          presentationMode: false,
+          randomizeOptions: false
+        },
+        events: []
+      };
+
+      let state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+
+      // ======================================================================
+      // COMPREHENSIVE QUESTION BANK (31+ ACTIVITIES + PRE/POST TESTS)
+      // ======================================================================
+
+      // PRE-TEST: 10 Diagnostic Items
+      const PRETEST_BANK = [
+        {
+          id: "pre-01",
+          question: "Apa peran mendasar dari Intrusion Detection System (IDS) dalam arsitektur keamanan jaringan komputer?",
+          options: ["Menghapus virus dari RAM komputer klien", "Memantau lalu lintas paket untuk mendeteksi tanda anomali atau serangan", "Menggantikan peran kabel UTP dan switch jaringan", "Menyimpan backup database secara periodik"],
+          answer: 1
+        },
+        {
+          id: "pre-02",
+          question: "Perbedaan utama antara NIDS dan HIDS terletak pada...",
+          options: ["NIDS memeriksa aliran paket jaringan, HIDS memeriksa log dan integritas file pada host", "NIDS hanya untuk Linux, HIDS hanya untuk Windows", "NIDS memblokir port, HIDS mematikan komputer", "NIDS menggunakan kabel fiber optic, HIDS tanpa kabel"],
+          answer: 0
+        },
+        {
+          id: "pre-03",
+          question: "Jika NIDS mendeteksi koneksi menuju port 22, layanan apa yang umumnya berjalan pada port tersebut?",
+          options: ["File Transfer Protocol (FTP)", "Secure Shell (SSH)", "Hypertext Transfer Protocol (HTTP)", "Domain Name System (DNS)"],
+          answer: 1
+        },
+        {
+          id: "pre-04",
+          question: "Bagaimana cara kerja Signature-Based Detection pada IDS?",
+          options: ["Mempelajari kebiasaan user selama 6 bulan", "Membandingkan data paket dengan database pola serangan yang sudah diketahui", "Mengacak port server secara berkala", "Meminta password setiap kali paket data lewat"],
+          answer: 1
+        },
+        {
+          id: "pre-05",
+          question: "Apa kelemahan utama dari Signature-Based Detection?",
+          options: ["Sangat lambat memproses paket", "Tidak mampu mendeteksi varian serangan baru (zero-day)", "Selalu mematikan sistem operasi", "Hanya berjalan pada server offline"],
+          answer: 1
+        },
+        {
+          id: "pre-06",
+          question: "Apa yang dimaksud dengan kondisi False Positive dalam pemantauan alert keamanan?",
+          options: ["Serangan nyata berhasil merusak server tanpa terdeteksi", "Alert berbunyi padahal lalu lintas jaringan sebenarnya sah dan tidak berbahaya", "Sistem IDS mengalami kerusakan perangkat keras", "Pengguna lupa memasukkan password sebanyak 1 kali"],
+          answer: 1
+        },
+        {
+          id: "pre-07",
+          question: "Apa yang dimaksud dengan kondisi True Positive?",
+          options: ["Alert berbunyi dan aktivitas tersebut memang benar-benar serangan berbahaya", "Lalu lintas normal dinyatakan aman oleh firewall", "Sistem IDS dimatikan oleh administrator", "Server berhasil diperbarui otomatis"],
+          answer: 0
+        },
+        {
+          id: "pre-08",
+          question: "Mengapa lonjakan lalu lintas pada pukul 07:00 pagi di sekolah tidak boleh langsung diklaim sebagai serangan DDoS?",
+          options: ["Karena hacker tidak pernah menyerang di pagi hari", "Karena jam tersebut bertepatan dengan kedatangan siswa dan guru yang mengakses jaringan sekolah", "Karena port Wi-Fi otomatis kebal dari DDoS", "Karena router sekolah selalu memfilter paket secara instan"],
+          answer: 1
+        },
+        {
+          id: "pre-09",
+          question: "Karakteristik utama dari serangan brute force otentikasi adalah...",
+          options: ["Pengiriman satu file zip berukuran raksasa", "Percobaan login berulang dengan kombinasi kredensial berbeda dalam waktu singkat", "Perubahan alamat IP gateway oleh ISP", "Pemasangan kabel LAN yang longgar"],
+          answer: 1
+        },
+        {
+          id: "pre-10",
+          question: "Mengapa seorang analis keamanan perlu melakukan korelasi multi-log (syslog + alert IDS)?",
+          options: ["Agar ukuran file log di harddisk semakin besar", "Untuk memverifikasi apakah alert jaringan selaras dengan bukti eksekusi nyata pada sistem host", "Supaya siswa tidak dapat mengakses internet", "Untuk mengganti alamat MAC switch"],
+          answer: 1
+        }
+      ];
+
+      // PERTEMUAN 1: 8 Aktivitas (1 Diagnostic, 4 MC, 2 Log Interpretations, 1 Misleading Case)
+      const M1_BANK = [
+        {
+          id: "m1-act-01",
+          difficulty: "easy",
+          cognitiveSkill: ["interpretation"],
+          misconception: "port_alone_means_attack",
+          context: "Seorang siswa memeriksa log NIDS sekolah dan menemukan baris: 'SRC=192.168.1.45 DST=192.168.1.10:22 PROTO=TCP'. Siswa tersebut langsung menyimpulkan terjadi serangan berbahaya.",
+          question: "Aktivitas 1 (Diagnostic): Mengapa kesimpulan siswa tersebut secara teknis belum valid?",
+          options: [
+            "Karena port 22 adalah port standar layanan SSH dan koneksi tunggal belum menunjukkan adanya indikasi aktivitas jahat",
+            "Karena alamat 192.168.1.45 adalah IP publik internasional yang kebal serangan",
+            "Karena protokol TCP tidak dapat digunakan untuk melakukan serangan jaringan",
+            "Karena IDS hanya boleh membaca protokol UDP"
+          ],
+          answer: 0,
+          evidence: "Parameter DST=192.168.1.10:22 PROTO=TCP hanya mendefinisikan koneksi soket standar.",
+          explanation: "Port 22 SSH adalah layanan administrasi standar. Sebuah koneksi biasa tidak dapat disimpulkan sebagai serangan tanpa melihat frekuensi, payload, atau signature alert.",
+          takeaway: "Kehadiran nomor port layanan standar bukanlah bukti serangan."
+        },
+        {
+          id: "m1-act-02",
+          difficulty: "medium",
+          cognitiveSkill: ["analysis"],
+          misconception: "port_alone_means_attack",
+          context: "Log NIDS mencatat: 'SIG=\"SSH Authentication Failure\" COUNT=47 TIMEFRAME=30s'.",
+          question: "Aktivitas 2: Indikator manakah yang paling kuat menunjukkan anomali percobaan brute force?",
+          options: [
+            "Jenis kabel jaringan yang menghubungkan switch",
+            "Kombinasi parameter COUNT=47 dalam interval 30 detik yang menunjukkan frekuensi tinggi tak wajar",
+            "Fakta bahwa server tujuan beralamat IP lokal kelas C",
+            "Nama perangkat workstation yang berawalan huruf 'LAB'"
+          ],
+          answer: 1,
+          evidence: "Tingginya nilai COUNT dalam jendela waktu sangat sempit (30s) merupakan indikator otomatisasi.",
+          explanation: "Manusia normal tidak dapat memasukkan 47 password salah dalam 30 detik. Tingginya frekuensi kegagalan adalah bukti kuat adanya automated tool.",
+          takeaway: "Frekuensi dan jendela waktu (timeframe) adalah indikator krusial dalam mendeteksi brute force."
+        },
+        {
+          id: "m1-act-03",
+          difficulty: "medium",
+          cognitiveSkill: ["interpretation"],
+          misconception: "private_ip_is_always_safe",
+          context: "Workstation sumber beralamat 192.168.1.45 (IP lokal lab komputer siswa).",
+          question: "Aktivitas 3: Bagaimana Anda mengevaluasi temuan bahwa penyerang berasal dari IP privat internal?",
+          options: [
+            "Alamat IP privat tidak berbahaya sehingga log dapat langsung diabaikan",
+            "Workstation lab siswa kemungkinan telah disusupi malware atau digunakan oleh siswa yang menjalankan automated script",
+            "IP privat otomatis berarti router sekolah telah diretas dari satelit",
+            "Server authentication sekolah otomatis tidak dapat diretas dari IP privat"
+          ],
+          answer: 1,
+          evidence: "Ancaman internal (insider threat) atau compromised host pada subnet lokal.",
+          explanation: "IP lokal tidak menjamin keamanan. Perangkat internal yang terinfeksi malware sering digunakan penyerang untuk melakukan lateral movement ke server sensitif.",
+          takeaway: "Serangan siber dapat bersumber dari dalam jaringan lokal (compromised internal endpoint)."
+        },
+        {
+          id: "m1-act-04",
+          difficulty: "hard",
+          cognitiveSkill: ["analysis"],
+          misconception: "alert_equals_attack",
+          context: "Perhatikan perbandingan 2 kasus log alert:<br><strong>Kasus A:</strong> COUNT=94 TIMEFRAME=30 detik.<br><strong>Kasus B:</strong> COUNT=3 TIMEFRAME=10 menit.",
+          question: "Aktivitas 4 (Log Comparison): Kasus manakah yang memerlukan eskalasi darurat analis SOC dan mengapa?",
+          options: [
+            "Kasus B, karena waktu 10 menit memberi hacker kesempatan berpikir lebih lama",
+            "Kasus A, karena rasio frekuensi kegagalan ekstrem dalam 30 detik merefleksikan automated dictionary attack berkecepatan tinggi",
+            "Keduanya sama berbahayanya karena sama-sama menghasilkan alert",
+            "Tidak ada yang berbahaya karena keduanya menargetkan port SSH"
+          ],
+          answer: 1,
+          evidence: "Kasus A memiliki densitas serangan 3,13 percobaan/detik vs Kasus B 0,005 percobaan/detik.",
+          explanation: "Kasus A menunjukkan serangan terotomatisasi yang intensif dan berpotensi melumpuhkan layanan atau membobol password lemah dalam waktu singkat.",
+          takeaway: "Tingkat keparahan insiden diukur dari intensitas, frekuensi, dan kecepatan percobaan serangan."
+        },
+        {
+          id: "m1-act-05",
+          difficulty: "easy",
+          cognitiveSkill: ["interpretation"],
+          misconception: "port_alone_means_attack",
+          context: "Kasus Khusus: Sebuah alert NIDS menampilkan peringatan dengan label SEVERITY=Low pada port 22.",
+          question: "Aktivitas 5 (Misleading Evidence): Jika seorang rekan teknisi berkata 'Karena DST_PORT=22, ini pasti brute force!', bagaimana respons Anda?",
+          options: [
+            "Setuju sepenuhnya, karena port 22 tidak pernah digunakan untuk hal lain",
+            "Menolak pernyataan tersebut, karena port 22 adalah port sah SSH dan kita memerlukan bukti frekuensi serta signature kegagalan otentikasi",
+            "Setuju, tetapi hanya jika kabel LAN yang digunakan berwarna merah",
+            "Menolak, karena port SSH yang asli adalah port 80"
+          ],
+          answer: 1,
+          evidence: "Port 22 SSH merupakan layanan administrasi remote yang sah dan lazim digunakan.",
+          explanation: "Port hanyalah gerbang layanan. Bukti serangan membutuhkan indikator perilaku seperti kegagalan beruntun atau payload eksploitasi.",
+          takeaway: "Jangan menyimpulkan adanya serangan hanya berdasarkan nomor port tujuan."
+        },
+        {
+          id: "m1-act-06",
+          difficulty: "medium",
+          cognitiveSkill: ["analysis"],
+          misconception: "signature_is_always_correct",
+          context: "NIDS di switch gateway mendeteksi traffic SSH terenkripsi. Seluruh isi muatan paket berbentuk acak karena enkripsi.",
+          question: "Aktivitas 6: Apa keterbatasan mendasar NIDS dalam memeriksa paket SSH terenkripsi dibanding HIDS?",
+          options: [
+            "NIDS tidak dapat membaca isi payload data terenkripsi dan hanya dapat mengamati metadata header (IP, port, volume)",
+            "NIDS otomatis meledak jika menerima paket enkripsi",
+            "HIDS tidak dapat dipasang pada server Linux",
+            "NIDS hanya bisa bekerja jika enkripsi menggunakan algoritma MD5"
+          ],
+          answer: 0,
+          evidence: "Enkripsi end-to-end SSH melindungi kerahasiaan muatan paket dari inspeksi jaringan pasif.",
+          explanation: "NIDS hanya melihat header paket (IP, port, ukuran). Sebaliknya, HIDS pada server dapat membaca log otentikasi langsung dari memori/syslog setelah didekripsi.",
+          takeaway: "NIDS unggul dalam visibilitas jaringan, tetapi terbatas pada inspeksi muatan terenkripsi."
+        },
+        {
+          id: "m1-act-07",
+          difficulty: "medium",
+          cognitiveSkill: ["interpretation"],
+          misconception: "alert_equals_attack",
+          context: "Sebuah alert Snort tertulis: '[1:2001219:2] ET SCAN Potential SSH Scan'.",
+          question: "Aktivitas 7 (Log Parameter): Apa arti kode '[1:2001219:2]' pada alert tersebut?",
+          options: [
+            "Alamat IP dan nomor kartu siswa penyerang",
+            "Signature ID (SID) dan nomor revisi rule yang memicu deteksi",
+            "Waktu shutdown server dalam satuan detik",
+            "Jumlah total server yang berhasil diretas"
+          ],
+          answer: 1,
+          evidence: "Format generator:ID:revisi pada sistem Snort/Suricata.",
+          explanation: "Kode tersebut merupakan pengenal spesifik aturan (Rule ID/SID) yang memungkinkan analis memeriksa dokumentasi aturan pendeteksi tersebut.",
+          takeaway: "Rule ID pada log IDS mempermudah penelusuran dokumentasi teknis deteksi."
+        },
+        {
+          id: "m1-act-08",
+          difficulty: "hard",
+          cognitiveSkill: ["analysis"],
+          misconception: "port_alone_means_attack",
+          context: "Mini-Case: Server CBT sekolah mengalami perlambatan. Log IDS mencatat 12 koneksi baru ke port 80 (HTTP) dari IP guru yang sah. Pada saat yang sama di port 22 terdapat 94 alert SSH failure dari workstation lab.",
+          question: "Aktivitas 8 (Mini-Case): Sebagai analis, investigasi mana yang harus diprioritaskan?",
+          options: [
+            "Fokus memblokir IP guru di port 80 karena server CBT sedang lambat",
+            "Fokus menginvestigasi workstation lab pada port 22 karena menunjukkan pola brute force aktif yang berisiko kompromi kredensial",
+            "Mematikan router sekolah sepenuhnya selama jam pelajaran",
+            "Mengabaikan keduanya dan menunggu laporan resmi siswa"
+          ],
+          answer: 1,
+          evidence: "Port 80 traffic adalah akses legitimate, sedangkan port 22 adalah malicious brute force.",
+          explanation: "Aktivitas port 80 dari IP guru adalah akses wajar. Lonjakan 94 kegagalan pada port 22 adalah ancaman keamanan aktif yang kritis.",
+          takeaway: "Prioritaskan investigasi pada aktivitas yang menunjukkan karakteristik serangan aktif berbahaya."
+        }
+      ];
+
+      // PERTEMUAN 2: 8 Aktivitas (3 Scenarios, 4 Trade-offs, 1 Decision Case)
+      const M2_BANK = [
+        {
+          id: "m2-act-01",
+          difficulty: "easy",
+          cognitiveSkill: ["analysis"],
+          misconception: "signature_is_always_correct",
+          context: "Skenario 1: Sekolah ingin memproteksi server dari eksploitasi EternalBlue (MS17-010) SMB yang sudah memiliki CVE dan pola byte biner yang sangat spesifik.",
+          question: "Aktivitas 1: Metode deteksi manakah yang paling efektif dan efisien dipilih?",
+          options: [
+            "Signature-Based Detection, karena serangan sudah dikenal luas dan signature menghasilkan deteksi instan dengan false positive minim",
+            "Anomaly-Based Detection, karena harus melatih baseline selama 3 bulan terlebih dahulu",
+            "Tidak menggunakan IDS sama sekali dan hanya mengandalkan kabel grounding",
+            "Mematikan seluruh jaringan komputer sekolah secara permanen"
+          ],
+          answer: 0,
+          evidence: "Known attack dengan pola signature statis yang terdefinisi dalam database Snort/Suricata.",
+          explanation: "Untuk serangan yang polanya sudah terdokumentasi (known attack), Signature-Based IDS adalah metode paling cepat, akurat, dan hemat komputasi.",
+          takeaway: "Signature-based sangat unggul untuk menangani serangan yang polanya sudah diketahui (known attacks)."
+        },
+        {
+          id: "m2-act-02",
+          difficulty: "medium",
+          cognitiveSkill: ["analysis"],
+          misconception: "signature_is_always_correct",
+          context: "Skenario 2: Workstation staf diduga terinfeksi ransomware varian baru (zero-day) yang belum memiliki nomor CVE atau tanda tangan di database antivirus/IDS manapun.",
+          question: "Aktivitas 2: Mengapa Signature-Based IDS dipastikan akan gagal mendeteksi serangan ini?",
+          options: [
+            "Karena Signature-Based IDS hanya bekerja jika komputer penyerang menggunakan Windows XP",
+            "Karena Signature-Based IDS hanya dapat mencocokkan pola yang sudah tersimpan di database aturannya",
+            "Karena kabel UTP tidak bisa mengalirkan ransomware",
+            "Karena varian baru selalu menghapus sistem operasi IDS dalam hitungan detik"
+          ],
+          answer: 1,
+          evidence: "Keterbatasan intrinsik deteksi signature terhadap ancaman baru (unknown threats).",
+          explanation: "Signature IDS bekerja seperti sidik jari buronan. Jika varian baru belum pernah dicatat sidik jarinya, IDS tidak memiliki aturan pembanding untuk membunyikan alert.",
+          takeaway: "Signature-based IDS memiliki blind spot fatal terhadap ancaman baru (zero-day)."
+        },
+        {
+          id: "m2-act-03",
+          difficulty: "hard",
+          cognitiveSkill: ["evaluation"],
+          misconception: "high_traffic_equals_ddos",
+          context: "Skenario 3: Setiap pagi pukul 07:00, 500 siswa terhubung ke Wi-Fi sekolah sehingga traffic naik 500% melampaui baseline malam hari.",
+          question: "Aktivitas 3: Apa dampak negatif jika Anomaly-Based IDS tidak dikalibrasi terhadap konteks jadwal kedatangan sekolah?",
+          options: [
+            "IDS akan mematikan daya listrik gedung sekolah",
+            "IDS akan memicu False Positive masif dan menandai seluruh koneksi siswa sebagai serangan DoS",
+            "IDS akan otomatis mengupgrade kecepatan internet menjadi 10 Gbps",
+            "Sistem operasi switch akan terhapus otomatis"
+          ],
+          answer: 1,
+          evidence: "Fluktuasi perilaku sah yang melampaui ambang batas deviasi statistik kaku.",
+          explanation: "Jika Anomaly IDS tidak memperhitungkan jam masuk sekolah dalam baseline profilnya, lonjakan akses sah akan dianggap sebagai deviasi berbahaya (False Positive).",
+          takeaway: "Anomaly-based IDS membutuhkan pemahaman konteks agar tidak menimbulkan alarm palsu massal."
+        },
+        {
+          id: "m2-act-04",
+          difficulty: "medium",
+          cognitiveSkill: ["analysis"],
+          misconception: "signature_is_always_correct",
+          context: "Pertimbangan Trade-off 1: Sekolah memiliki 1 staf IT yang mengelola seluruh infrastruktur jaringan.",
+          question: "Aktivitas 4: Dari segi beban operasional harian (workload), mengapa Signature-Based lebih diminati oleh tim dengan SDM terbatas?",
+          options: [
+            "Karena Signature IDS menghasilkan alarm palsu (false positive) yang relatif jauh lebih rendah dibanding Anomaly IDS",
+            "Karena Signature IDS tidak membutuhkan listrik untuk beroperasi",
+            "Karena Anomaly IDS hanya boleh dijalankan oleh polisi siber",
+            "Karena Signature IDS dapat mematikan internet seluruh kota"
+          ],
+          answer: 0,
+          evidence: "Tingkat presisi tinggi dari signature rules mengurangi waktu investigasi alert yang tidak perlu.",
+          explanation: "Anomaly IDS sering memicu alarm palsu yang mengharuskan staf memeriksa setiap anomali. Tim kecil akan mengalami 'alert fatigue' jika menggunakan Anomaly IDS tanpa tuning.",
+          takeaway: "Signature-based memiliki false positive lebih rendah sehingga menghemat tenaga analis."
+        },
+        {
+          id: "m2-act-05",
+          difficulty: "hard",
+          cognitiveSkill: ["evaluation"],
+          misconception: "alert_equals_attack",
+          context: "Pertimbangan Trade-off 2: Administrator menurunkan sensitivitas Anomaly IDS agar tidak menghasilkan banyak alert palsu.",
+          question: "Aktivitas 5: Risiko keamanan terbesar apa yang muncul akibat penurunan sensitivitas ambang batas (threshold) tersebut?",
+          options: [
+            "Harddisk server akan lebih cepat penuh",
+            "Munculnya False Negative (serangan nyata yang lolos tanpa terdeteksi karena berada di bawah ambang batas baru)",
+            "Kabel fiber optic mengalami overheat",
+            "Siswa tidak dapat membuka situs web pencarian"
+          ],
+          answer: 1,
+          evidence: "Trade-off langsung antara False Positive Rate dan False Negative Rate.",
+          explanation: "Menurunkan ambang sensitivitas memang menekan alarm palsu, tetapi meningkatkan risiko 'False Negative', yaitu serangan nyata yang menyusup tanpa terdeteksi.",
+          takeaway: "Menurunkan sensitivitas deteksi meningkatkan risiko lolosnya serangan nyata (False Negative)."
+        },
+        {
+          id: "m2-act-06",
+          difficulty: "medium",
+          cognitiveSkill: ["analysis"],
+          misconception: "signature_is_always_correct",
+          context: "Pertimbangan Trade-off 3: Signature rule IDS harus terus-menerus diperbarui (rule updates).",
+          question: "Aktivitas 6: Apa konsekuensi jika database signature pada server sekolah tidak pernah di-update selama 1 tahun?",
+          options: [
+            "Server otomatis tidak dapat dinyalakan kembali",
+            "IDS menjadi rentan terhadap seluruh exploit dan teknik malware yang muncul dalam kurun waktu 1 tahun tersebut",
+            "Semua data nilai siswa akan terenkripsi otomatis",
+            "Kecepatan transfer data lokal turun 90%"
+          ],
+          answer: 1,
+          evidence: "Ketergantungan absolut Signature IDS pada kebaruan basis data ancaman.",
+          explanation: "Signature IDS hanya sekuat pembaruan basis datanya. Aturan lama tidak mengenal serangan baru yang dirilis komunitas exploit setahun terakhir.",
+          takeaway: "Signature-based IDS menuntut pembaruan basis data aturan secara berkala."
+        },
+        {
+          id: "m2-act-07",
+          difficulty: "hard",
+          cognitiveSkill: ["evaluation"],
+          misconception: "high_traffic_equals_ddos",
+          context: "Pertimbangan Trade-off 4: Sekolah ingin menerapkan Hybrid IDS (kombinasi Signature dan Anomaly).",
+          question: "Aktivitas 7: Apa keunggulan arsitektur Hybrid IDS dalam konteks jaringan modern?",
+          options: [
+            "Bisa menggabungkan kecepatan deteksi serangan dikenal sekaligus menangkap anomali lonjakan serangan baru",
+            "Menghilangkan kebutuhan akan kabel jaringan",
+            "Dapat bekerja tanpa memerlukan sistem operasi komputer",
+            "Biaya perangkat keras menjadi gratis"
+          ],
+          answer: 0,
+          evidence: "Sinergi keunggulan signature (presisi tinggi) dan anomali (cakupan zero-day).",
+          explanation: "Pendekatan hibrida menyaring serangan umum secara cepat dengan signature, sementara modul anomali mengawasi penyimpangan perilaku yang mencurigakan.",
+          takeaway: "Arsitektur Hybrid memadukan keunggulan presisi signature dan fleksibilitas anomali."
+        },
+        {
+          id: "m2-act-08",
+          difficulty: "hard",
+          cognitiveSkill: ["evaluation"],
+          misconception: "signature_is_always_correct",
+          context: "Decision Case: Server ujian sekolah berbasis web (CBT) akan digunakan besok pagi. Sekolah ingin mengamankan dari eksploitasi injeksi SQL yang sudah umum sekaligus mengantisipasi bot spam baru.",
+          question: "Aktivitas 8 (Decision Case): Keputusan rencana penanganan apa yang paling tepat?",
+          options: [
+            "Mengaktifkan Signature IDS dengan rule Web-Exploit/SQLi yang teruji, serta mengalibrasi baseline Anomaly IDS agar mengakomodasi lonjakan 1000 siswa ujian",
+            "Mematikan IDS agar ujian tidak terganggu dan membiarkan server tanpa proteksi",
+            "Mengaktifkan Anomaly IDS dengan threshold paling ketat agar setiap siswa yang klik halaman langsung diblokir",
+            "Menghapus seluruh file web CBT dari server"
+          ],
+          answer: 0,
+          evidence: "Penerapan pertahanan berlapis dengan penyesuaian kalibrasi kontekstual operasional ujian.",
+          explanation: "Signature rules melindungi dari exploit web umum secara presisi, sedangkan baseline yang dikalibrasi mencegah siswa ujian terblokir oleh alarm palsu.",
+          takeaway: "Rencana pertahanan terbaik menyeimbangkan proteksi keamanan dan kelancaran operasional pengguna."
+        }
+      ];
+
+      // PERTEMUAN 3: 5 Aktivitas Tambahan (di luar 3 SOC Triages)
+      const M3_BANK = [
+        {
+          id: "m3-act-01",
+          difficulty: "medium",
+          cognitiveSkill: ["evaluation"],
+          misconception: "alert_equals_attack",
+          question: "Aktivitas 4 (Reasoning 1): Mengapa seorang analis SOC tidak boleh langsung memblokir alamat IP setiap kali alert IDS berbunyi?",
+          options: [
+            "Karena alert bisa saja merupakan False Positive dari aktivitas jaringan yang sah sehingga pemblokiran sembarangan dapat mengganggu operasional sekolah",
+            "Karena pemblokiran IP memerlukan izin dari kementerian komunikasi",
+            "Karena firewall tidak bisa memblokir alamat IP",
+            "Karena hacker otomatis mengetahui password analis jika diblokir"
+          ],
+          answer: 0,
+          evidence: "Dampak operasional dari False Positive (Denial of Service terhadap pengguna sah).",
+          explanation: "Memblokir IP tanpa triase dapat memutus akses pengguna sah seperti guru atau server update resmi jika alert tersebut ternyata False Positive.",
+          takeaway: "Triase alert sangat penting untuk mencegah pemblokiran salah sasaran."
+        },
+        {
+          id: "m3-act-02",
+          difficulty: "hard",
+          cognitiveSkill: ["inference"],
+          misconception: "alert_equals_attack",
+          question: "Aktivitas 5 (Reasoning 2): Pada kasus alert pemindaian port (Port Scan) dari workstation admin, mengapa keputusan 'Need More Evidence' lebih profesional dibanding langsung menyimpulkan True Positive?",
+          options: [
+            "Karena bukti awal belum cukup untuk membedakan antara audit keamanan sah oleh admin vs peretasan akun admin oleh pihak luar",
+            "Karena sistem IDS dilarang menyalahkan administrator",
+            "Karena port scan tidak pernah berbahaya",
+            "Karena analis SOC takut dimarahi kepala sekolah"
+          ],
+          answer: 0,
+          evidence: "Konteks operasional administrasi vs kompromi akun sah.",
+          explanation: "Seorang admin mungkin melakukan audit resmi, namun akun admin juga bisa saja disusupi hacker. Bukti tambahan (tiket kerja/syslog otentikasi) diperlukan sebelum memutuskan.",
+          takeaway: "Kasus ambigu membutuhkan penyelidikan bukti tambahan sebelum keputusan diambil."
+        },
+        {
+          id: "m3-act-03",
+          difficulty: "medium",
+          cognitiveSkill: ["evaluation"],
+          misconception: "high_traffic_equals_ddos",
+          question: "Aktivitas 6 (Reasoning 3): Indikator utama yang membuktikan lonjakan traffic 1.8 GB pada pukul 07:00 pagi adalah False Positive adalah...",
+          options: [
+            "Waktu kejadian bertepatan dengan kedatangan siswa dan paket yang lewat adalah HTTPS/DHCP/DNS yang sah untuk registrasi jaringan",
+            "Ukuran file log yang sangat rapi di layar monitor",
+            "Fakta bahwa server menggunakan kabel berwarna biru",
+            "Penggunaan switch bermerk terkenal"
+          ],
+          answer: 0,
+          evidence: "Kesesuaian jenis paket jaringan dan jam operasional nyata di lapangan.",
+          explanation: "Jenis paket standar (DHCP/DNS/HTTPS) dan kecocokan jam kedatangan siswa membuktikan bahwa lalu lintas tersebut adalah aktivitas alami pengguna sekolah.",
+          takeaway: "Korelasi jadwal dan jenis paket membuktikan keabsahan lalu lintas jaringan."
+        },
+        {
+          id: "m3-act-04",
+          difficulty: "hard",
+          cognitiveSkill: ["analysis"],
+          misconception: "private_ip_is_always_safe",
+          question: "Aktivitas 7 (Comparative Case 1): Bandingkan Kasus 1 (83 SSH failure dari IP lab) dan Kasus 2 (lonjakan traffic pagi). Mengapa Kasus 1 diklasifikasikan True Positive sedangkan Kasus 2 False Positive?",
+          options: [
+            "Kasus 1 menunjukkan intensitas kegagalan otentikasi berbahaya pada layanan privat, sedangkan Kasus 2 adalah lalu lintas wajar jam masuk sekolah",
+            "Karena Kasus 1 menggunakan protokol TCP sedangkan Kasus 2 menggunakan satelit",
+            "Karena Kasus 2 terjadi di pagi hari sehingga selalu dianggap aman",
+            "Karena Kasus 1 menargetkan server Windows"
+          ],
+          answer: 0,
+          evidence: "Kontras antara intent jahat (otentikasi gagal berulang) vs intent wajar (akses internet jam sekolah).",
+          explanation: "Kasus 1 tidak memiliki justifikasi wajar untuk 83 kegagalan otentikasi, sedangkan Kasus 2 memiliki konteks operasional yang kuat dan jenis paket yang legitimate.",
+          takeaway: "Klasifikasi TP/FP didasarkan pada intensitas anomali dan konteks kewajaran lalu lintas."
+        },
+        {
+          id: "m3-act-05",
+          difficulty: "hard",
+          cognitiveSkill: ["inference"],
+          misconception: "alert_equals_attack",
+          question: "Aktivitas 8 (Comparative Case 2): Jika workstation admin yang memindai port (Alert 3) terbukti TIDAK memiliki tiket perubahan resmi dan dilakukan dari jarak jauh pada hari libur, bagaimana status triage berubah?",
+          options: [
+            "Berubah menjadi True Positive kritis karena mengindikasikan penyusupan akun kredensial admin secara ilegal",
+            "Tetap False Positive karena IP-nya milik admin",
+            "Berubah menjadi masalah kabel jaringan",
+            "Sistem otomatis menghapus log tersebut"
+          ],
+          answer: 0,
+          evidence: "Ketiadaan otorisasi dan anomali waktu mengubah status aktivitas sah menjadi insiden keamanan.",
+          explanation: "Bukti tambahan berupa ketiadaan tiket kerja dan anomali waktu di hari libur membuktikan bahwa kredensial admin kemungkinan besar telah disalahgunakan penyerang.",
+          takeaway: "Bukti kontekstual baru dapat mengubah klasifikasi awal dari aman menjadi ancaman kritis."
+        }
+      ];
+
+      // PERTEMUAN 4: 5 Validation Questions (sebelum CTF Flag)
+      const M4_VALIDATION_BANK = [
+        {
+          id: "m4-val-01",
+          question: "Validasi 1: Berdasarkan korelasi bukti log kronologis di atas, jenis serangan apa yang terkonfirmasi secara pasti?",
+          options: ["Serangan SSH Brute Force Dictionary Attack", "Penyebaran virus melalui email phishing", "Kerusakan fisik pada kabel fiber optic", "Serangan Man-in-the-Middle pada protokol ARP"],
+          answer: 0
+        },
+        {
+          id: "m4-val-02",
+          question: "Validasi 2: Bukti konkret manakah yang paling kuat memvalidasi kesimpulan tersebut?",
+          options: [
+            "Lonjakan COUNT kegagalan otentikasi dari 12 menjadi 47 lalu 94 percobaan dalam kurun waktu kurang dari 1 menit",
+            "Fakta bahwa server tujuan memiliki port bernomor 22",
+            "Penggunaan sistem operasi Linux pada komputer laboratorium",
+            "Warna teks peringatan pada terminal yang berwarna merah"
+          ],
+          answer: 0
+        },
+        {
+          id: "m4-val-03",
+          question: "Validasi 3: Mengapa insiden ini dipastikan bukan sekadar siswa yang lupa password akunnya?",
+          options: [
+            "Karena syslog mencatat percobaan berbagai macam username default (root, admin, test, oracle) secara beruntun dalam interval detik",
+            "Karena siswa dilarang masuk ke laboratorium",
+            "Karena server tidak pernah menyimpan password siswa",
+            "Karena siswa selalu mengingat password mereka"
+          ],
+          answer: 0
+        },
+        {
+          id: "m4-val-04",
+          question: "Validasi 4: Mengapa alert NIDS tersebut diklasifikasikan sebagai True Positive yang valid?",
+          options: [
+            "Karena didukung oleh bukti nyata syslog host otentikasi dan pola frekuensi kegagalan ekstrem yang tidak wajar",
+            "Karena sistem IDS dibuat oleh vendor ternama",
+            "Karena jam di komputer menampilkan pukul 08:15 WIB",
+            "Karena switch jaringan tidak mengalami mati lampu"
+          ],
+          answer: 0
+        },
+        {
+          id: "m4-val-05",
+          question: "Validasi 5: Rekomendasi mitigasi teknis apa yang paling efektif dan tepat diterapkan pada server SSH sekolah?",
+          options: [
+            "Menerapkan Fail2ban untuk memblokir IP penyerang otomatis, menonaktifkan login root password, dan mewajibkan autentikasi Public Key",
+            "Menghapus software SSH dan menggantinya dengan Telnet yang tidak terenkripsi",
+            "Mematikan router sekolah setiap 10 menit sekali",
+            "Mengganti seluruh kabel jaringan di laboratorium komputer"
+          ],
+          answer: 0
+        }
+      ];
+
+      // POST-TEST: 12 Evaluative Assessment Items
+      const POSTTEST_BANK = [
+        {
+          id: "post-01",
+          question: "Sebuah NIDS mendeteksi alert 'ET SCAN Potential SSH Scan'. Apa langkah penalaran pertama yang harus dilakukan analis?",
+          options: ["Menghubungkan alert dengan log autentikasi host dan pola frekuensi koneksi", "Langsung memformat harddisk server", "Menonaktifkan seluruh kartu jaringan sekolah", "Mengabaikan alert karena port SSH selalu aman"],
+          answer: 0
+        },
+        {
+          id: "post-02",
+          question: "Kelemahan terbesar jika jaringan sekolah hanya mengandalkan Signature-Based IDS tanpa kalibrasi adalah...",
+          options: ["Tidak dapat mendeteksi eksploitasi baru (zero-day) dan serangan yang polanya sedikit dimodifikasi", "Sistem tidak dapat menggunakan kabel LAN", "Server akan otomatis kehabisan daya listrik", "Kecepatan monitor komputer menurun"],
+          answer: 0
+        },
+        {
+          id: "post-03",
+          question: "Dalam kondisi manakah Anomaly-Based IDS paling rentan menghasilkan False Positive tinggi?",
+          options: ["Ketika terjadi perubahan perilaku sah yang belum sempat dipelajari ke dalam baseline profil normal", "Ketika server dimatikan saat libur sekolah", "Ketika hacker menyerang menggunakan tools lama", "Ketika semua kabel jaringan terpasang kencang"],
+          answer: 0
+        },
+        {
+          id: "post-04",
+          question: "Jika IP sumber serangan adalah 10.10.10.45 (subnet ruang guru), evaluasi kritis yang tepat adalah...",
+          options: ["Perangkat internal di ruang guru mungkin telah disusupi malware atau terinfeksi skrip otomatis", "Alamat IP privat tidak mungkin dapat mengirimkan paket data", "Guru tersebut pasti merupakan hacker internasional", "Server otentikasi otomatis kebal dari subnet ruang guru"],
+          answer: 0
+        },
+        {
+          id: "post-05",
+          question: "Manakah bukti yang paling krusial untuk membedakan brute force attack dari kegagalan login wajar?",
+          options: ["Frekuensi kegagalan ekstrem dan pergantian username otomatis dalam jendela waktu sangat singkat", "Keberadaan protokol TCP pada header paket", "Penggunaan kabel UTP Cat 6", "Nomor port tujuan yang bernilai genap"],
+          answer: 0
+        },
+        {
+          id: "post-06",
+          question: "Apa konsekuensi operasional jika sebuah alert False Positive direspons dengan pemblokiran IP permanen?",
+          options: ["Layanan sah bagi pengguna berhak akan terputus (Denial of Service bagi pengguna sah)", "Server akan otomatis ter-upgrade ke versi terbaru", "Hacker akan langsung menyerahkan diri", "Biaya langganan internet sekolah turun 50%"],
+          answer: 0
+        },
+        {
+          id: "post-07",
+          question: "Pada kasus ambigu di SOC, mengapa opsi 'Need More Evidence' merupakan tindakan yang metodologis?",
+          options: ["Mencegah kesalahan klasifikasi dini dan mengumpulkan bukti kontekstual pendukung sebelum bertindak", "Agar analis dapat pulang lebih cepat tanpa bekerja", "Karena sistem operasi melarang pengambilan keputusan di siang hari", "Supaya file database log terisi penuh"],
+          answer: 0
+        },
+        {
+          id: "post-08",
+          question: "Mengapa NIDS memerlukan dukungan HIDS pada server yang menjalankan layanan terenkripsi (HTTPS/SSH)?",
+          options: ["HIDS dapat membaca log dan integritas file lokal setelah paket terenkripsi didekripsi oleh host", "HIDS tidak memerlukan tenaga listrik untuk beroperasi", "NIDS hanya dapat bekerja pada komputer tanpa sistem operasi", "HIDS membuat kabel jaringan tahan air"],
+          answer: 0
+        },
+        {
+          id: "post-09",
+          question: "Jika administrator menurunkan threshold sensitivitas IDS secara drastis untuk meniadakan alarm palsu, bahaya yang mengintai adalah...",
+          options: ["Meningkatnya risiko False Negative di mana serangan nyata menyusup tanpa terdeteksi", "Monitor komputer akan menampilkan layar biru", "Kecepatan akses internet menjadi terlalu cepat", "Kabel LAN mengalami korsleting listrik"],
+          answer: 0
+        },
+        {
+          id: "post-10",
+          question: "Mitigasi pencegahan paling kokoh untuk menghentikan serangan SSH brute force secara permanen adalah...",
+          options: ["Menerapkan Fail2ban, menonaktifkan password authentication, dan menggunakan SSH Key-based authentication", "Mengganti password root menjadi 123456", "Menghapus port 22 dari tabel matematika", "Mematikan server setiap kali siswa hendak login"],
+          answer: 0
+        },
+        {
+          id: "post-11",
+          question: "Bagaimana cara mengecek apakah solusi mitigasi Fail2ban yang diterapkan pada server SSH bekerja efektif?",
+          options: ["Menguji simulasi percobaan login gagal dari IP uji dan memverifikasi apakah IP tersebut otomatis terblokir pada iptables", "Memeriksa apakah warna casing server berubah", "Menanyakan kepada siswa apakah mereka menyukai Fail2ban", "Melihat apakah lampu indikator switch berkedip lebih lambat"],
+          answer: 0
+        },
+        {
+          id: "post-12",
+          question: "Pernyataan yang paling mencerminkan kemampuan metakognisi dan berpikir kritis dalam investigasi keamanan siber adalah...",
+          options: ["'Keputusan saya didasarkan pada korelasi bukti objektif multi-log, namun saya tetap harus menguji kembali hipotesis terhadap kemungkinan false positive.'", "'Saya yakin 100% tanpa perlu memeriksa log karena insting saya selalu benar.'", "'Jika alert IDS berbunyi merah, itu pasti serangan kiamat siber.'", "'Investigasi keamanan tidak memerlukan bukti log sama sekali.'"],
+          answer: 0
+        }
+      ];
+
+      // ======================================================================
+      // INITIALIZATION & STATE RECOVERY
+      // ======================================================================
+      function initApp() {
+        loadState();
+        applyTheme(state.settings.theme);
+        applyPresentationMode(state.settings.presentationMode);
+        setupEventListeners();
+        startPassiveTimer();
+        renderAllBanks();
+        updateUI();
+
+        // Router recovery
+        if (state.student && state.student.name) {
+          navigateTo('dashboard');
+        } else {
+          navigateTo('landing');
+        }
+      }
+
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            if (parsed.schemaVersion === SCHEMA_VERSION) {
+              state = Object.assign({}, DEFAULT_STATE, parsed);
+            } else {
+              // Safe migration / recovery
+              console.warn("Schema migration triggered.");
+              state = Object.assign({}, DEFAULT_STATE, parsed, { schemaVersion: SCHEMA_VERSION });
+            }
+          }
+        } catch (e) {
+          console.error("LocalStorage corruption detected:", e);
+          showToast("Data sesi sebelumnya tidak dapat dipulihkan. Menggunakan setelan awal.", "warning");
+          state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+        }
+      }
+
+      function saveState() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+          updateUI();
+        } catch (e) {
+          console.error("Gagal menyimpan ke LocalStorage:", e);
+        }
+      }
+
+      function logEvent(type, metadata = {}) {
+        const evt = {
+          type: type,
+          timestamp: new Date().toISOString(),
+          metadata: metadata
+        };
+        state.events.push(evt);
+        saveState();
+
+        // Update teacher mode event log stream in real time if open
+        const stream = document.getElementById('teacher-event-stream');
+        if (stream) {
+          const line = `[${new Date().toLocaleTimeString()}] ${type}: ${JSON.stringify(metadata)}\n`;
+          stream.textContent = line + stream.textContent;
+        }
+      }
+
+      function startPassiveTimer() {
+        setInterval(() => {
+          state.timeTracking.totalActiveMs += 1000;
+          const mins = Math.floor(state.timeTracking.totalActiveMs / 60000);
+          const tTime = document.getElementById('teacher-time-spent');
+          if (tTime) tTime.textContent = `${mins} menit`;
+        }, 1000);
+      }
+
+      // ======================================================================
+      // ROUTING & VIEW NAVIGATION
+      // ======================================================================
+      function navigateTo(viewId) {
+        state.currentView = viewId;
+        document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+
+        const target = document.getElementById('view-' + viewId);
+        if (target) {
+          target.classList.add('active');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Nav buttons highlight
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+        if (viewId === 'dashboard') document.getElementById('btn-nav-dashboard')?.classList.add('active');
+        if (viewId === 'pretest') document.getElementById('btn-nav-pretest')?.classList.add('active');
+        if (viewId === 'posttest') document.getElementById('btn-nav-posttest')?.classList.add('active');
+
+        logEvent('view_opened', { view: viewId });
+        updateUI();
+      }
+
+      // ======================================================================
+      // RENDER QUESTION BANKS INTO DOM
+      // ======================================================================
+      function renderAllBanks() {
+        renderAssessment('pretest', PRETEST_BANK, 'pretest-questions-container');
+        renderAssessment('posttest', POSTTEST_BANK, 'posttest-questions-container');
+        renderMeetingQuestions('m1', M1_BANK, 'm1-questions-list');
+        renderMeetingQuestions('m2', M2_BANK, 'm2-questions-list');
+        renderMeetingQuestions('m3', M3_BANK, 'm3-questions-list');
+        renderMeetingQuestions('m4_val', M4_VALIDATION_BANK, 'm4-validation-questions-list');
+      }
+
+      function renderAssessment(type, bank, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = '';
+
+        bank.forEach((q, idx) => {
+          const card = document.createElement('div');
+          card.className = 'question-card';
+          card.id = `${type}-card-${idx}`;
+
+          const isAnswered = state.answers[type][q.id] !== undefined;
+          const userAns = state.answers[type][q.id];
+
+          let optsHtml = '';
+          q.options.forEach((opt, optIdx) => {
+            const isSelected = userAns === optIdx;
+            optsHtml += `
+              <div class="option-item ${isSelected ? 'selected' : ''}" onclick="app.selectAssessmentOption('${type}', '${q.id}', ${optIdx})">
+                <input type="radio" name="${type}_${q.id}" ${isSelected ? 'checked' : ''} style="margin-top: 3px;">
+                <span>${opt}</span>
+              </div>
+            `;
+          });
+
+          card.innerHTML = `
+            <div class="question-meta-row">
+              <span class="badge badge-info">BUTIR SOAL #${idx + 1}</span>
+            </div>
+            <div class="question-prompt">${q.question}</div>
+            <div class="options-list">${optsHtml}</div>
+          `;
+          container.appendChild(card);
+        });
+      }
+
+      function selectAssessmentOption(type, qId, optIdx) {
+        state.answers[type][qId] = optIdx;
+        logEvent('assessment_option_selected', { type, qId, optIdx });
+        renderAssessment(type, type === 'pretest' ? PRETEST_BANK : POSTTEST_BANK, `${type}-questions-container`);
+        saveState();
+      }
+
+      function submitAssessment(type) {
+        const bank = (type === 'pretest') ? PRETEST_BANK : POSTTEST_BANK;
+        const answers = state.answers[type];
+        const answeredCount = Object.keys(answers).length;
+
+        if (answeredCount < bank.length) {
+          showToast(`Anda baru menjawab ${answeredCount} dari ${bank.length} butir soal!`, 'warning');
+          return;
+        }
+
+        let correctCount = 0;
+        bank.forEach(q => {
+          if (answers[q.id] === q.answer) correctCount++;
+        });
+
+        const score = Math.round((correctCount / bank.length) * 100);
+        state.scores[type] = score;
+        logEvent('assessment_submitted', { type, score, correct: correctCount, total: bank.length });
+        saveState();
+
+        showToast(`${type.toUpperCase()} Terkirim! Nilai tersimpan: ${score}`, 'success');
+        navigateTo('dashboard');
+      }
+
+      function renderMeetingQuestions(meetingKey, bank, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = '';
+
+        bank.forEach((q, idx) => {
+          const card = document.createElement('div');
+          card.className = 'question-card';
+          card.id = `card-${q.id}`;
+
+          const userAns = state.answers[meetingKey] ? state.answers[meetingKey][q.id] : undefined;
+          const isSubmitted = userAns !== undefined;
+          const isCorrect = userAns === q.answer;
+          const attempts = state.attempts[q.id] || 0;
+
+          let optsHtml = '';
+          q.options.forEach((opt, optIdx) => {
+            let optClass = '';
+            if (isSubmitted) {
+              if (optIdx === q.answer) optClass = 'correct locked';
+              else if (optIdx === userAns) optClass = 'incorrect locked';
+              else optClass = 'locked';
+            } else if (userAns === optIdx) {
+              optClass = 'selected';
+            }
+
+            optsHtml += `
+              <div class="option-item ${optClass}" onclick="app.selectMeetingOption('${meetingKey}', '${q.id}', ${optIdx})">
+                <input type="radio" name="${q.id}" ${userAns === optIdx ? 'checked' : ''} ${isSubmitted ? 'disabled' : ''} style="margin-top: 3px;">
+                <span>${opt}</span>
+              </div>
+            `;
+          });
+
+          // Structured Pedagogical Feedback
+          let feedbackHtml = '';
+          if (isSubmitted) {
+            feedbackHtml = `
+              <div class="structured-feedback ${isCorrect ? 'correct' : 'incorrect'}">
+                <div class="feedback-header-badge">${isCorrect ? '✓ KEPUTUSAN TEPAT (CORRECT)' : '✗ EVALUASI KURANG TEPAT (INCORRECT)'}</div>
+                <div><strong>Jawaban Anda:</strong> ${q.options[userAns]}</div>
+                <div class="feedback-section-title">BUKTI OBJEKTIF (EVIDENCE):</div>
+                <div>${q.evidence}</div>
+                <div class="feedback-section-title">PENALARAN ANALITIS (EXPECTED REASONING):</div>
+                <div>${q.explanation}</div>
+                ${!isCorrect && q.misconception ? `
+                  <div class="feedback-misconception">
+                    <strong>Miskonsepsi yang Perlu Diperhatikan:</strong> ${MISCONCEPTIONS[q.misconception]}
+                  </div>
+                ` : ''}
+                <div class="feedback-section-title">POKOK INGATAN (WHAT TO REMEMBER):</div>
+                <div>${q.takeaway}</div>
+                ${!isCorrect && attempts >= 2 ? `
+                  <div class="feedback-refresher">
+                    <button class="btn btn-secondary btn-sm" onclick="app.jumpToRemediation('${meetingKey}')">
+                      Need a refresher? Review Konsep Materi
+                    </button>
+                  </div>
+                ` : ''}
+              </div>
+            `;
+          }
+
+          card.innerHTML = `
+            <div class="question-meta-row">
+              <span class="badge badge-primary">AKTIVITAS #${idx + 1}</span>
+              <span class="badge badge-neutral">${q.difficulty ? q.difficulty.toUpperCase() : 'MEDIUM'}</span>
+            </div>
+            ${q.context ? `<div class="question-context">${q.context}</div>` : ''}
+            <div class="question-prompt">${q.question}</div>
+            <div class="options-list">${optsHtml}</div>
+            ${!isSubmitted ? `
+              <button class="btn btn-primary btn-sm" onclick="app.submitMeetingQuestion('${meetingKey}', '${q.id}')">Kirim Jawaban Analisis</button>
+            ` : ''}
+            ${feedbackHtml}
+          `;
+
+          container.appendChild(card);
+        });
+      }
+
+      function selectMeetingOption(meetingKey, qId, optIdx) {
+        if (!state.answers[meetingKey]) state.answers[meetingKey] = {};
+        if (state.answers[meetingKey][qId] !== undefined) return; // Locked if submitted
+
+        const card = document.getElementById(`card-${qId}`);
+        if (!card) return;
+        card.querySelectorAll('.option-item').forEach((el, idx) => {
+          el.classList.toggle('selected', idx === optIdx);
+          const radio = el.querySelector('input[type="radio"]');
+          if (radio) radio.checked = (idx === optIdx);
+        });
+        card.dataset.pendingChoice = optIdx;
+      }
+
+      function submitMeetingQuestion(meetingKey, qId) {
+        const card = document.getElementById(`card-${qId}`);
+        if (!card) return;
+        const pending = card.dataset.pendingChoice;
+
+        if (pending === undefined) {
+          showToast('Pilih salah satu opsi jawaban terlebih dahulu!', 'warning');
+          return;
+        }
+
+        const choiceIdx = parseInt(pending, 10);
+        if (!state.answers[meetingKey]) state.answers[meetingKey] = {};
+        state.answers[meetingKey][qId] = choiceIdx;
+
+        state.attempts[qId] = (state.attempts[qId] || 0) + 1;
+
+        logEvent('question_answered', { meetingKey, qId, choiceIdx });
+        saveState();
+        renderAllBanks();
+        checkMeetingCompletion(meetingKey);
+      }
+
+      function jumpToRemediation(meetingKey) {
+        showToast('Mengarahkan ke materi konsep untuk penguatan pemahaman...', 'info');
+        if (meetingKey === 'm1') {
+          document.getElementById('m1-material')?.scrollIntoView({ behavior: 'smooth' });
+        } else if (meetingKey === 'm2') {
+          document.getElementById('m2-material')?.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+
+      // ======================================================================
+      // MEETING 3: SOC TRIAGE & EVIDENCE UNLOCKING
+      // ======================================================================
+      function handleTriage(alertId, choice) {
+        state.answers.m3_triage[alertId] = choice;
+        logEvent('triage_decision', { alertId, choice });
+
+        const feedback = document.getElementById(`triage-feedback-${alertId}`);
+        const btnTp = document.getElementById(`btn-t${alertId}-tp`);
+        const btnFp = document.getElementById(`btn-t${alertId}-fp`);
+        const btnNme = document.getElementById(`btn-t${alertId}-nme`);
+
+        btnTp?.classList.toggle('selected-tp', choice === 'TP');
+        btnFp?.classList.toggle('selected-fp', choice === 'FP');
+        btnNme?.classList.toggle('selected-nme', choice === 'NME');
+
+        if (!feedback) return;
+
+        if (alertId === 1) {
+          const isCorrect = (choice === 'TP');
+          feedback.className = `structured-feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+          feedback.innerHTML = `
+            <div class="feedback-header-badge">${isCorrect ? '✓ KLASIFIKASI TEPAT' : '✗ EVALUASI KURANG TEPAT'}</div>
+            <div><strong>Keputusan Anda:</strong> ${choice}</div>
+            <div class="feedback-section-title">PENALARAN SOC:</div>
+            <div>Alert #001 adalah <strong>TRUE POSITIVE</strong>. Kegagalan 83 login SSH dalam 2 menit pada jam sekolah tanpa jadwal maintenance membuktikan serangan brute force nyata.</div>
+            <div class="feedback-section-title">POKOK INGATAN:</div>
+            <div>Densitas kegagalan tinggi pada layanan otentikasi tanpa justifikasi operasional adalah True Positive.</div>
+          `;
+        } else if (alertId === 2) {
+          const isCorrect = (choice === 'FP');
+          feedback.className = `structured-feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+          feedback.innerHTML = `
+            <div class="feedback-header-badge">${isCorrect ? '✓ KLASIFIKASI TEPAT' : '✗ EVALUASI KURANG TEPAT'}</div>
+            <div><strong>Keputusan Anda:</strong> ${choice}</div>
+            <div class="feedback-section-title">PENALARAN SOC:</div>
+            <div>Alert #002 adalah <strong>FALSE POSITIVE</strong>. Walau volume 1.8 GB melampaui baseline malam hari, waktu 07:00 adalah jam masuk sekolah saat ratusan siswa serentak menyambungkan Wi-Fi.</div>
+            <div class="feedback-section-title">POKOK INGATAN:</div>
+            <div>Lonjakan lalu lintas yang selaras dengan jam operasional resmi sekolah adalah alarm palsu (False Positive).</div>
+          `;
+        } else if (alertId === 3) {
+          const isNME = (choice === 'NME');
+          const isFP = (choice === 'FP');
+          feedback.className = `structured-feedback ${isNME || isFP ? 'correct' : 'incorrect'}`;
+          feedback.innerHTML = `
+            <div class="feedback-header-badge">${isNME ? '✓ ANALISIS SOC PROFESIONAL' : (isFP ? '✓ AUDIT SAH TERKONFIRMASI' : '✗ EVALUASI PREMATUR')}</div>
+            <div><strong>Keputusan Anda:</strong> ${choice}</div>
+            <div class="feedback-section-title">PENALARAN KASUS AMBIGU:</div>
+            <div>Pada kasus pemindaian port oleh IP admin, memilih <strong>NEED MORE EVIDENCE</strong> adalah langkah tepat jika belum membuka bukti tiket. Setelah bukti dibuka, aktivitas ini terbukti merupakan <strong>Audit Sah Resmi (False Positive)</strong>.</div>
+          `;
+        }
+
+        saveState();
+        checkMeetingCompletion('m3');
+      }
+
+      function unlockEvidence(type) {
+        if (!state.triageEvidenceUnlocked.includes(type)) {
+          state.triageEvidenceUnlocked.push(type);
+          logEvent('evidence_unlocked', { type });
+          saveState();
+        }
+
+        const stream = document.getElementById('unlocked-evidence-stream');
+        if (!stream) return;
+
+        let content = '';
+        if (type === 'endpoint') {
+          content = `<strong>Konteks Endpoint:</strong> Host 10.10.10.44 terdaftar atas nama Pak Budi (Network Administrator). Status antivirus update, tidak ada malware.`;
+        } else if (type === 'auth') {
+          content = `<strong>Syslog Otentikasi:</strong> Sesi login admin menggunakan Hardware 2FA Token dari subnet kabel ruang server pada pukul 14:25 WIB.`;
+        } else if (type === 'baseline') {
+          content = `<strong>Tiket IT (CHG-2026-88):</strong> Terdaftar jadwal resmi 'Audit Port Kuartal 3 untuk Persiapan Ujian Sekolah' yang disetujui Kepala Sekolah.`;
+        }
+
+        const div = document.createElement('div');
+        div.className = 'evidence-feed-item';
+        div.innerHTML = content;
+        stream.appendChild(div);
+        showToast('Bukti tambahan berhasil dibuka!', 'info');
+      }
+
+      // ======================================================================
+      // MEETING 4: CTF FLAG VALIDATION & DEEP REFLECTION
+      // ======================================================================
+      function toggleHint(step) {
+        const body = document.getElementById(`hint-body-${step}`);
+        const icon = document.getElementById(`hint-icon-${step}`);
+        if (!body) return;
+
+        const isOpen = body.style.display === 'block';
+        body.style.display = isOpen ? 'none' : 'block';
+        if (icon) icon.innerHTML = isOpen ? '&darr; Buka' : '&uarr; Tutup';
+
+        if (!isOpen && !state.ctf.hintsUsed.includes(step)) {
+          state.ctf.hintsUsed.push(step);
+          logEvent('hint_revealed', { step });
+          saveState();
+        }
+      }
+
+      function submitFlag() {
+        const input = document.getElementById('input-flag');
+        const feedback = document.getElementById('flag-feedback');
+        if (!input) return;
+
+        const val = input.value.trim().toUpperCase();
+        if (!val) {
+          showToast('Masukkan kode flag terlebih dahulu!', 'warning');
+          return;
+        }
+
+        // Validate against base64 decoded flag
+        const expected = atob(_ENC_FLAG);
+
+        if (val === expected) {
+          state.ctf.solved = true;
+          state.ctf.flagSubmittedAt = new Date().toISOString();
+          logEvent('ctf_flag_solved');
+          saveState();
+
+          if (feedback) {
+            feedback.style.display = 'block';
+            feedback.style.color = 'var(--success)';
+            feedback.textContent = 'FLAG ACCEPTED ✓ — Verifikasi Pola Serangan Berhasil!';
+          }
+          input.disabled = true;
+          document.getElementById('btn-submit-flag')?.setAttribute('disabled', 'true');
+          showToast('Flag Valid! Silakan lanjutkan tahap refleksi kritis.', 'success');
+        } else {
+          logEvent('ctf_flag_failed', { attempted: val });
+          if (feedback) {
+            feedback.style.display = 'block';
+            feedback.style.color = 'var(--danger)';
+            feedback.textContent = 'FLAG NOT VALID — Cermati kembali korelasi bukti log atau buka petunjuk!';
+          }
+          showToast('Flag tidak valid. Periksa petunjuk!', 'danger');
+        }
+      }
+
+      function updateReflectionCount() {
+        const textarea = document.getElementById('textarea-reflection');
+        const counter = document.getElementById('reflection-char-count');
+        if (!textarea || !counter) return;
+
+        const len = textarea.value.trim().length;
+        counter.textContent = `${len} / 100 karakter minimum`;
+        counter.style.color = (len >= 100) ? 'var(--success)' : 'var(--text-muted)';
+      }
+
+      function submitReflection() {
+        if (!state.ctf.solved) {
+          showToast('Harap verifikasi security flag terlebih dahulu!', 'warning');
+          return;
+        }
+
+        const textarea = document.getElementById('textarea-reflection');
+        const text = textarea ? textarea.value.trim() : '';
+
+        if (text.length < 100) {
+          showToast(`Refleksi Anda baru ${text.length} karakter. Minimal 100 karakter!`, 'warning');
+          return;
+        }
+
+        state.ctf.reflection = text;
+        state.progress.meeting4 = true;
+        state.scores.meeting4 = 100;
+        logEvent('reflection_submitted', { charLength: text.length });
+        saveState();
+
+        showToast('Pembelajaran Selesai! Selamat atas ketelitian investigasi Anda.', 'success');
+        openModal('modal-summary');
+      }
+
+      // ======================================================================
+      // COMPLETION & PROGRESS TRACKING
+      // ======================================================================
+      function checkMeetingCompletion(meetingKey) {
+        if (meetingKey === 'm1') {
+          const ans = state.answers.m1 || {};
+          if (Object.keys(ans).length >= M1_BANK.length) {
+            state.progress.meeting1 = true;
+            state.scores.meeting1 = 100;
+            saveState();
+            showToast('Pertemuan 1 Selesai! Seluruh 8 aktivitas terjawab.', 'success');
+          }
+        } else if (meetingKey === 'm2') {
+          const ans = state.answers.m2 || {};
+          if (Object.keys(ans).length >= M2_BANK.length) {
+            state.progress.meeting2 = true;
+            state.scores.meeting2 = 100;
+            saveState();
+            showToast('Pertemuan 2 Selesai! Seluruh 8 aktivitas terjawab.', 'success');
+          }
+        } else if (meetingKey === 'm3') {
+          const ansQ = state.answers.m3 || {};
+          const ansT = state.answers.m3_triage || {};
+          if (Object.keys(ansQ).length >= M3_BANK.length && Object.keys(ansT).length >= 3) {
+            state.progress.meeting3 = true;
+            state.scores.meeting3 = 100;
+            saveState();
+            showToast('Pertemuan 3 Selesai! Seluruh triase & soal terjawab.', 'success');
+          }
+        }
+      }
+
+      function updateUI() {
+        // Navigation badges & stats
+        const navName = document.getElementById('student-nav-name');
+        const avatarLetter = document.getElementById('student-avatar-letter');
+        if (state.student && state.student.name) {
+          navName.textContent = state.student.name;
+          avatarLetter.textContent = state.student.name.charAt(0).toUpperCase();
+        }
+
+        let completedMeetings = 0;
+        if (state.progress.meeting1) completedMeetings++;
+        if (state.progress.meeting2) completedMeetings++;
+        if (state.progress.meeting3) completedMeetings++;
+        if (state.progress.meeting4) completedMeetings++;
+
+        const pct = Math.round((completedMeetings / 4) * 100);
+
+        const progLabel = document.getElementById('header-progress-text');
+        const progBar = document.getElementById('header-progress-bar');
+        if (progLabel) progLabel.textContent = `${completedMeetings} / 4 Pertemuan`;
+        if (progBar) progBar.style.width = `${pct}%`;
+
+        const statProgVal = document.getElementById('stat-progress-val');
+        const statProgSub = document.getElementById('stat-progress-sub');
+        if (statProgVal) statProgVal.textContent = `${completedMeetings} / 4`;
+        if (statProgSub) statProgSub.textContent = `${pct}% kurikulum selesai`;
+
+        // Count completed activities across all sections
+        const m1Count = Object.keys(state.answers.m1 || {}).length;
+        const m2Count = Object.keys(state.answers.m2 || {}).length;
+        const m3TriageCount = Object.keys(state.answers.m3_triage || {}).length;
+        const m3Count = Object.keys(state.answers.m3 || {}).length;
+        const m4ValCount = Object.keys(state.answers.m4_validation || {}).length;
+        const m4CTFCount = state.ctf.solved ? 1 : 0;
+        const m4ReflCount = state.ctf.reflection ? 1 : 0;
+
+        const totalActiveActivities = m1Count + m2Count + m3TriageCount + m3Count + m4ValCount + m4CTFCount + m4ReflCount;
+        const statAct = document.getElementById('stat-completed-activities');
+        if (statAct) statAct.textContent = `${totalActiveActivities} / 31`;
+
+        // Pre/Post-Test displays
+        const preVal = document.getElementById('stat-pretest-score');
+        if (preVal) preVal.textContent = (state.scores.pretest !== null) ? `${state.scores.pretest}` : '-';
+
+        const postVal = document.getElementById('stat-posttest-score');
+        if (postVal) postVal.textContent = (state.scores.posttest !== null) ? `${state.scores.posttest}` : '-';
+
+        const dName = document.getElementById('dash-student-name');
+        const dClass = document.getElementById('dash-student-class');
+        if (dName) dName.textContent = state.student.name || 'Siswa';
+        if (dClass) dClass.textContent = state.student.className || 'XI TJKT';
+
+        // Badges on dashboard
+        ['m1', 'm2', 'm3', 'm4'].forEach((k, idx) => {
+          const badge = document.getElementById(`status-badge-${k}`);
+          const isComp = state.progress[`meeting${idx + 1}`];
+          if (badge) {
+            badge.className = isComp ? 'badge badge-success' : 'badge badge-neutral';
+            badge.textContent = isComp ? 'COMPLETED ✓' : 'IN PROGRESS';
+          }
+        });
+
+        // Event count in teacher mode
+        const evCount = document.getElementById('teacher-event-count');
+        if (evCount) evCount.textContent = `${state.events.length} Event`;
+      }
+
+      // ======================================================================
+      // TOKEN INSPECTOR & TEACHER ACTIONS
+      // ======================================================================
+      function inspectToken(key, value, explanation) {
+        const box = document.getElementById('token-inspector');
+        const t = document.getElementById('inspector-field-name');
+        const d = document.getElementById('inspector-field-desc');
+        if (!box || !t || !d) return;
+
+        t.textContent = `FIELD: ${key} = ${value}`;
+        d.innerHTML = explanation;
+        box.classList.add('visible');
+        logEvent('token_inspected', { key, value });
+      }
+
+      function toggleRandomization() {
+        state.settings.randomizeOptions = !state.settings.randomizeOptions;
+        const btn = document.getElementById('btn-toggle-randomize');
+        if (btn) {
+          btn.textContent = state.settings.randomizeOptions ? 'Acak: AKTIF' : 'Acak: NONAKTIF (Konsisten)';
+        }
+        logEvent('randomization_toggled', { active: state.settings.randomizeOptions });
+        saveState();
+      }
+
+      function exportRecord(format = 'json') {
+        const exportData = {
+          student: state.student,
+          schemaVersion: state.schemaVersion,
+          timeTracking: {
+            startedAt: state.timeTracking.startedAt,
+            totalActiveMinutes: Math.floor(state.timeTracking.totalActiveMs / 60000)
+          },
+          progress: state.progress,
+          scores: state.scores,
+          ctf: state.ctf,
+          eventsCount: state.events.length,
+          events: state.events,
+          exportedAt: new Date().toISOString()
+        };
+
+        const filename = `IDS_Lab_Record_${(state.student.name || 'Siswa').replace(/\s+/g, '_')}_${Date.now()}`;
+
+        if (format === 'json') {
+          const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+          downloadBlob(blob, `${filename}.json`);
+        } else if (format === 'csv') {
+          let csv = "Timestamp,Nama,Kelas,Absen,PreTest_Score,PostTest_Score,M1_Status,M2_Status,M3_Status,M4_Status,Hints_Count,Reflection_Length\n";
+          csv += `"${new Date().toISOString()}","${state.student.name}","${state.student.className}","${state.student.number}",` +
+                 `"${state.scores.pretest}","${state.scores.posttest}",` +
+                 `"${state.progress.meeting1}","${state.progress.meeting2}","${state.progress.meeting3}","${state.progress.meeting4}",` +
+                 `"${state.ctf.hintsUsed.length}","${(state.ctf.reflection || '').length}"\n`;
+
+          const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+          downloadBlob(blob, `${filename}.csv`);
+        }
+
+        showToast(`Data berhasil diekspor (${format.toUpperCase()})!`, 'success');
+      }
+
+      function downloadBlob(blob, filename) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+
+      function confirmResetProgress() {
+        localStorage.removeItem(STORAGE_KEY);
+        state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+        closeModal('modal-reset');
+        closeModal('modal-teacher');
+        showToast('Seluruh data kemajuan belajar telah direset.', 'warning');
+        updateUI();
+        navigateTo('landing');
+      }
+
+      // ======================================================================
+      // 7 CONTEXT IMPLEMENTATION FOR INFRASTRUCTURE
+      // ======================================================================
+      const INFRA_CONTEXTS = {
+        1: {
+          num: "KONTEKS 1 DARI 7",
+          ref: "SANS NSM & NIST SP 800-94 Framework",
+          title: "Network Topology & Zone Context (Topologi & Zona Jaringan)",
+          desc: "Menganalisis posisi segmen IP, VLAN, dan lokasi sensor NIDS (Perimeter, DMZ, Server Farm, atau Lab Komputer Siswa). Menentukan apakah lalu lintas bersifat eksternal melintasi internet atau pergerakan lateral (lateral movement) di dalam jaringan lokal.",
+          question: "Dari zona jaringan mana paket ini berasal dan ke mana tujuannya? Apakah ada pelanggaran kebijakan isolasi antar-subnet?",
+          example: "Paket dari subnet Lab Siswa (192.168.1.0/24) yang mencoba koneksi langsung ke subnet Server Nilai (192.168.10.0/24) tanpa melewati firewall routing merupakan indikasi lateral movement mencurigakan."
+        },
+        2: {
+          num: "KONTEKS 2 DARI 7",
+          ref: "Critical Asset Management (CIS Control 1)",
+          title: "Asset Identity & Role Context (Identitas & Peran Aset)",
+          desc: "Mengevaluasi nilai dan fungsi aset yang terlibat (Server Nilai Siswa, Web CBT, Domain Controller, PC Lab Siswa, atau Printer IoT). Tingkat keparahan insiden berbanding lurus dengan kritikalitas fungsi aset tersebut.",
+          question: "Apa fungsi operasional aset ini? Apakah aset memproses data rahasia sekolah atau hanya perangkat praktikum sekali pakai?",
+          example: "Kegagalan otentikasi pada PC Lab (LAB-PC-17) mungkin hanya kesalahan ketik siswa, tetapi kegagalan otentikasi beruntun pada Server Database Nilai (192.168.1.10) merupakan insiden prioritas tinggi."
+        },
+        3: {
+          num: "KONTEKS 3 DARI 7",
+          ref: "Operational Schedule & Temporal Baseline",
+          title: "Temporal & Schedule Context (Waktu & Jadwal Operasional)",
+          desc: "Menghubungkan waktu kejadian (timestamp) dengan jadwal operasional sekolah: jam KBM aktif (07:00 - 15:30 WIB), hari libur, tengah malam, atau jadwal pemeliharaan sistem (maintenance window).",
+          question: "Apakah aktivitas ini terjadi pada jam kerja normal yang sah atau di luar jadwal wajar tanpa izin resmi?",
+          example: "Lonjakan trafik Wi-Fi pada pukul 07:00 pagi adalah False Positive jam kedatangan siswa, sedangkan upaya login remote desktop (RDP) pada pukul 01:23 dini hari adalah anomali waktu kritis (True Positive)."
+        },
+        4: {
+          num: "KONTEKS 4 DARI 7",
+          ref: "Identity & Access Management (IAM)",
+          title: "User & Authentication Context (Identitas & Hak Akses Pengguna)",
+          desc: "Memeriksa identitas akun yang digunakan: akun lokal, akun domain, service account, hak administratif (root/Administrator), serta status faktor otentikasi (Password vs Hardware 2FA Token).",
+          question: "Siapa pengguna di balik koneksi ini? Apakah akun memiliki kewenangan resmi dan menggunakan mekanisme otentikasi yang sah?",
+          example: "Percobaan login beruntun menggunakan username kamus default (root, admin, test, oracle) membuktikan serangan bot otomatis, bukan interaksi staf resmi."
+        },
+        5: {
+          num: "KONTEKS 5 DARI 7",
+          ref: "Statistical Traffic Profiling & Thresholds",
+          title: "Baseline Traffic & Volume Context (Baseline & Deviasi Volume)",
+          desc: "Membandingkan volume paket saat ini dengan profil normal historis (throughput harian, packet per second, jumlah koneksi simultan). Deviasi ekstrem dari baseline menjadi sinyal adanya serangan.",
+          question: "Seberapa besar deviasi volume data dibanding hari biasa? Apakah lonjakan ini sesuai dengan toleransi statistik?",
+          example: "83 kali kegagalan otentikasi SSH dalam waktu 2 menit melebihi baseline kegagalan normal sekolah (< 2 kali per jam) sebesar 4150%."
+        },
+        6: {
+          num: "KONTEKS 6 DARI 7",
+          ref: "Vulnerability & Service Mapping",
+          title: "Service, Port & Vulnerability Context (Layanan, Port & Kerentanan)",
+          desc: "Mengidentifikasi protokol dan port (22 SSH, 80 HTTP, 445 SMB, 3389 RDP), versi software daemon, serta status patching terhadap CVE yang dieksploitasi penyerang.",
+          question: "Apakah layanan target memang menjalankan software versi rentan yang belum diperbarui (unpatched)?",
+          example: "Eksploitasi SMB MS17-010 menuju server file sharing yang belum dipasang patch keamanan Windows merupakan ancaman eksploitasi aktif."
+        },
+        7: {
+          num: "KONTEKS 7 DARI 7",
+          ref: "Threat Intelligence & Detection Signatures",
+          title: "Threat Intelligence & Signature Context (Intelijen Ancaman & Aturan IDS)",
+          desc: "Menghubungkan alert dengan Signature ID (SID), taktik & teknik MITRE ATT&CK, klasifikasi ancaman (ET ATTACK_RESPONSE, ET SCAN), serta reputasi IP penyerang dari threat feed.",
+          question: "Rule apa yang terpicu dan teknik serangan apa yang teridentifikasi dalam kerangka kerja keamanan siber?",
+          example: "Rule SID 1:2001221 'ET ATTACK_RESPONSE SSH Brute Force Attempt' mengonfirmasi bahwa IDS mengenali pola serangan dictionary SSH terstruktur."
+        }
+      };
+
+      function showInfrastructureContext(id) {
+        const data = INFRA_CONTEXTS[id];
+        if (!data) return;
+
+        for (let i = 1; i <= 7; i++) {
+          const btn = document.getElementById(`btn-ctx-${i}`);
+          if (btn) {
+            if (i === id) {
+              btn.style.borderColor = 'var(--primary)';
+              btn.style.background = 'var(--primary-light)';
+              btn.style.color = 'var(--primary)';
+            } else {
+              btn.style.borderColor = 'var(--border)';
+              btn.style.background = 'var(--surface)';
+              btn.style.color = 'var(--text-primary)';
+            }
+          }
+        }
+
+        const bNum = document.getElementById('ctx-badge-num');
+        const bRef = document.getElementById('ctx-academic-ref');
+        const title = document.getElementById('ctx-title');
+        const desc = document.getElementById('ctx-desc');
+        const q = document.getElementById('ctx-question');
+        const c = document.getElementById('ctx-case');
+
+        if (bNum) bNum.textContent = data.num;
+        if (bRef) bRef.textContent = data.ref;
+        if (title) title.textContent = data.title;
+        if (desc) desc.textContent = data.desc;
+        if (q) q.innerHTML = `<strong>Pertanyaan Heuristik Analis:</strong> "${data.question}"`;
+        if (c) c.innerHTML = `<strong>Contoh Kasus Infrastruktur SMK:</strong> ${data.example}`;
+
+        logEvent('infrastructure_context_viewed', { contextId: id, title: data.title });
+      }
+
+      // ======================================================================
+      // THEME & MODAL UTILITIES
+      // ======================================================================
+      function applyTheme(theme) {
+        if (theme === 'system') document.documentElement.removeAttribute('data-theme');
+        else document.documentElement.setAttribute('data-theme', theme);
+      }
+
+      function applyPresentationMode(active) {
+        document.body.classList.toggle('presentation-mode', active);
+      }
+
+      function openModal(id) {
+        if (id === 'modal-summary') {
+          const body = document.getElementById('summary-modal-body');
+          if (body) {
+            body.innerHTML = `
+              <div style="background: var(--surface-elevated); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border); margin-bottom: 1rem;">
+                <strong>Siswa:</strong> ${state.student.name || '-'} | <strong>Kelas:</strong> ${state.student.className || '-'} (Absen: ${state.student.number || '-'})
+              </div>
+              <div class="table-responsive">
+                <table class="comparison-table">
+                  <thead>
+                    <tr><th>Aktivitas Pembelajaran</th><th>Status / Skor</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Pre-Test Diagnostik (10 Soal)</td><td>${state.scores.pretest !== null ? state.scores.pretest : 'Belum'}</td></tr>
+                    <tr><td>Pertemuan 1 (Memahami Masalah)</td><td>${state.progress.meeting1 ? 'Selesai (8 Aktivitas)' : 'Dalam Proses'}</td></tr>
+                    <tr><td>Pertemuan 2 (Merencanakan Pemecahan)</td><td>${state.progress.meeting2 ? 'Selesai (8 Aktivitas)' : 'Dalam Proses'}</td></tr>
+                    <tr><td>Pertemuan 3 (Melaksanakan Rencana)</td><td>${state.progress.meeting3 ? 'Selesai (Triase + 5 Soal)' : 'Dalam Proses'}</td></tr>
+                    <tr><td>Pertemuan 4 (Meninjau Kembali)</td><td>${state.progress.meeting4 ? 'Flag & Refleksi Valid' : 'Dalam Proses'}</td></tr>
+                    <tr><td>Post-Test Evaluasi Akhir (12 Soal)</td><td>${state.scores.posttest !== null ? state.scores.posttest : 'Belum'}</td></tr>
+                    <tr><td>Petunjuk Terbuka (Scaffolding)</td><td>${state.ctf.hintsUsed.length} Petunjuk</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            `;
+          }
+        }
+        document.getElementById(id)?.classList.add('open');
+      }
+
+      function closeModal(id) {
+        document.getElementById(id)?.classList.remove('open');
+      }
+
+      function showToast(message, type = 'success') {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+        toast.innerHTML = `<span>${type === 'success' ? '✓' : (type === 'warning' ? '⚠' : 'ℹ')}</span> <span>${message}</span>`;
+        container.appendChild(toast);
+
+        setTimeout(() => {
+          toast.style.opacity = '0';
+          setTimeout(() => toast.remove(), 250);
+        }, 3200);
+      }
+
+      // ======================================================================
+      // EVENT LISTENERS BINDING
+      // ======================================================================
+      function setupEventListeners() {
+        document.getElementById('nav-brand')?.addEventListener('click', () => {
+          if (state.student.name) navigateTo('dashboard');
+          else navigateTo('landing');
+        });
+
+        document.getElementById('btn-nav-dashboard')?.addEventListener('click', () => {
+          if (!state.student.name) navigateTo('login');
+          else navigateTo('dashboard');
+        });
+
+        document.getElementById('btn-nav-pretest')?.addEventListener('click', () => navigateTo('pretest'));
+        document.getElementById('btn-nav-posttest')?.addEventListener('click', () => navigateTo('posttest'));
+        document.getElementById('btn-nav-teacher')?.addEventListener('click', () => openModal('modal-teacher'));
+        document.getElementById('btn-student-profile')?.addEventListener('click', () => navigateTo('login'));
+
+        document.getElementById('btn-landing-start')?.addEventListener('click', () => {
+          if (state.student.name) navigateTo('dashboard');
+          else navigateTo('login');
+        });
+        document.getElementById('btn-landing-pretest')?.addEventListener('click', () => navigateTo('pretest'));
+
+        document.getElementById('btn-theme-toggle')?.addEventListener('click', () => {
+          const next = (state.settings.theme === 'dark') ? 'light' : 'dark';
+          state.settings.theme = next;
+          applyTheme(next);
+          saveState();
+          showToast(`Tema diubah: ${next.toUpperCase()}`, 'info');
+        });
+
+        document.getElementById('btn-presentation-mode')?.addEventListener('click', () => {
+          state.settings.presentationMode = !state.settings.presentationMode;
+          applyPresentationMode(state.settings.presentationMode);
+          saveState();
+          showToast(state.settings.presentationMode ? 'Mode Guru / Proyektor Aktif' : 'Mode Normal', 'info');
+        });
+
+        document.getElementById('student-identity-form')?.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const name = document.getElementById('input-student-name').value.trim();
+          const cls = document.getElementById('input-student-class').value.trim();
+          const num = document.getElementById('input-student-number').value.trim();
+
+          if (!name || !cls || !num) {
+            showToast('Lengkapi seluruh formulir identitas!', 'warning');
+            return;
+          }
+
+          state.student = { name, className: cls, number: num, createdAt: new Date().toISOString() };
+          saveState();
+          logEvent('student_logged_in');
+          showToast('Identitas tersimpan! Selamat belajar.', 'success');
+          navigateTo('dashboard');
+        });
+
+        document.getElementById('btn-continue-session')?.addEventListener('click', () => navigateTo('dashboard'));
+        document.getElementById('btn-switch-identity')?.addEventListener('click', () => {
+          document.getElementById('existing-session-box').style.display = 'none';
+          document.getElementById('input-student-name').value = '';
+          document.getElementById('input-student-name').focus();
+        });
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            document.querySelectorAll('.modal-backdrop.open').forEach(el => el.classList.remove('open'));
+          }
+        });
+      }
+
+      // Public API
+      return {
+        init: initApp,
+        navigateTo: navigateTo,
+        selectAssessmentOption: selectAssessmentOption,
+        submitAssessment: submitAssessment,
+        selectMeetingOption: selectMeetingOption,
+        submitMeetingQuestion: submitMeetingQuestion,
+        jumpToRemediation: jumpToRemediation,
+        handleTriage: handleTriage,
+        unlockEvidence: unlockEvidence,
+        toggleHint: toggleHint,
+        submitFlag: submitFlag,
+        updateReflectionCount: updateReflectionCount,
+        submitReflection: submitReflection,
+        inspectToken: inspectToken,
+        toggleRandomization: toggleRandomization,
+        openModal: openModal,
+        closeModal: closeModal,
+        confirmResetProgress: confirmResetProgress,
+        exportRecord: exportRecord,
+        showInfrastructureContext: showInfrastructureContext
+      };
+    })();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      app.init();
+    });
+  </script>
+</body>
+</html>

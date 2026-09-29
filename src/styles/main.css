@@ -1,0 +1,16 @@
+@import './variables.css';
+@import './reset.css';
+@import './typography.css';
+@import './layout.css';
+@import './components/header.css';
+@import './components/sidebar.css';
+@import './components/cards.css';
+@import './components/buttons.css';
+@import './components/forms.css';
+@import './components/quiz.css';
+@import './components/logs.css';
+@import './components/triage.css';
+@import './components/ctf.css';
+@import './components/modal.css';
+@import './components/admin.css';
+@import './responsive.css';

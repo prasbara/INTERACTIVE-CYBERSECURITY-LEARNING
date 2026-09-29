@@ -1,0 +1,27 @@
+{
+  "name": "ids-learning-lab",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Interactive Cybersecurity Learning Platform based on LAPS-Heuristik for Vocational High School (SMK TJKT)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test tests/*.test.js",
+    "lint": "node scripts/auditSyntax.js"
+  },
+  "keywords": [
+    "cybersecurity",
+    "ids",
+    "laps-heuristik",
+    "educational-technology",
+    "critical-thinking",
+    "smk-tjkt"
+  ],
+  "author": "Undergraduate Thesis Researcher - Computer Science Education",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^6.2.0"
+  }
+}

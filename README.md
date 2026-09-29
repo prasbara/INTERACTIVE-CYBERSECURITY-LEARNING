@@ -4,7 +4,7 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f0c29,50:302b63,100:24243e&height=200&section=header&text=IDS%20Learning%20Lab&fontSize=52&fontColor=ffffff&fontAlignY=38&desc=Interactive%20Cybersecurity%20Learning%20Platform&descAlignY=60&descSize=18&animation=fadeIn" width="100%"/>
 
 <!-- Typing Animation -->
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&duration=3000&pause=800&color=7C3AED&center=true&vCenter=true&multiline=true&repeat=true&width=700&height=80&lines=🔍+Detect.+Analyze.+Defend.;🚩+30+CTF+Flags+Waiting+to+be+Captured...;🧠+Think+Like+a+SOC+Analyst+from+Day+One." alt="Typing SVG" />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&duration=3500&pause=1000&color=A78BFA&center=true&vCenter=true&repeat=true&width=700&height=45&lines=Detect.+Analyze.+Defend.;30+CTF+Flags+Waiting+to+be+Captured...;Think+Like+a+SOC+Analyst+from+Day+One.;Blue+Team+starts+here." alt="Typing SVG" />
 
 <br/>
 
